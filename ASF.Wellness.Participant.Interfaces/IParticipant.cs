@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors;
 
-namespace ASF.Wellness.Participant.Interfaces
+namespace ASF.Wellness.Participant.Domain
 {
     /// <summary>
     /// This interface defines the methods exposed by an actor.
@@ -25,5 +25,11 @@ namespace ASF.Wellness.Participant.Interfaces
         /// <param name="count"></param>
         /// <returns></returns>
         Task SetCountAsync(int count, CancellationToken cancellationToken);
+
+        Task AddActivity(ParticipantActivity participantActivity);
+
+        Task AddEvent(ParticipantEvent participantEvent);
+
+        Task<MonthParticipations> GetMonthParticipations(int month, int year);
     }
 }
