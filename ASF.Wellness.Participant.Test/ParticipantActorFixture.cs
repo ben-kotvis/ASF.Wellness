@@ -10,44 +10,21 @@ using System.Threading.Tasks;
 using ASF.Wellness.Participant.Domain;
 using ASF.Wellness.Participant;
 using System.Numerics;
-using Mocks;
+using ServiceFabric.Mocks;
 
 namespace ASF.Wellness.Participant.Test
 {
     [TestClass]
-    public class ParticipantActorFixture
+    public class ParticipantActorFixture : FixtureBase
     {
 
         private const string ParticipationsKeyName = "Participations";
 
-        private static ICodePackageActivationContext codePackageContext = new MockCodePackageActivationContext(
-            "fabric:/someapp",
-            "SomeAppType",
-            "Code",
-            "1.0.0.0",
-            Guid.NewGuid().ToString(),
-            @"C:\Log",
-            @"C:\Temp",
-            @"C:\Work",
-            "ServiceManifest",
-            "1.0.0.0"
-            );
-
-        private static StatefulServiceContext statefulServiceContext = new StatefulServiceContext(
-            new NodeContext("Test", new NodeId(new BigInteger(0), new BigInteger(0)), new BigInteger(0), "TestType", "localhost"),
-            codePackageContext,
-            "",
-            new Uri("fabric:/testapp/testservice"),
-            new byte[0],
-            Guid.NewGuid(),
-            0);
-
-        
         [TestMethod]
         public async Task validate_new_actor_has_no_participations()
         {
             MockServiceProxyFactory serviceProxyFactory = new MockServiceProxyFactory();
-            ParticipantActor target = await CreateParticipantActor();
+            ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
             var participations = await target.GetMonthParticipations(1, 2017);
             Assert.IsFalse(participations.Activities.Any());
             Assert.IsFalse(participations.Events.Any());
@@ -57,7 +34,7 @@ namespace ASF.Wellness.Participant.Test
         public async Task validate_annual_total_on_events_and_activities()
         {
             MockServiceProxyFactory serviceProxyFactory = new MockServiceProxyFactory();
-            ParticipantActor target = await CreateParticipantActor();
+            ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
 
             var currentDate = DateTimeOffset.UtcNow;
 
@@ -79,12 +56,11 @@ namespace ASF.Wellness.Participant.Test
             Assert.AreEqual(3, participations.AnnualTotalPoints);            
         }
 
-
         [TestMethod]
         public async Task validate_month_total_on_events_and_activities()
         {
             MockServiceProxyFactory serviceProxyFactory = new MockServiceProxyFactory();
-            ParticipantActor target = await CreateParticipantActor();
+            ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
 
             var currentDate = DateTimeOffset.UtcNow;
 
@@ -110,7 +86,7 @@ namespace ASF.Wellness.Participant.Test
         public async Task validate_average_on_events_and_activities()
         {
             MockServiceProxyFactory serviceProxyFactory = new MockServiceProxyFactory();
-            ParticipantActor target = await CreateParticipantActor();
+            ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
 
             var currentDate = DateTimeOffset.UtcNow;
 
@@ -126,24 +102,6 @@ namespace ASF.Wellness.Participant.Test
             var participations = await target.GetMonthParticipations(currentDate.Month, currentDate.Year);
             Assert.AreEqual(1, Math.Floor(participations.AveragePointsPerMonth));
         }
-
-        private static async Task<ParticipantActor> CreateParticipantActor()
-        {
-            try
-            {
-                var target = new ParticipantActor(
-                    new ActorService(
-                        context: statefulServiceContext,
-                        actorTypeInfo: ActorTypeInformation.Get(typeof(ParticipantActor)),
-                        stateManagerFactory: (actorBase, stateProvider) => new MockActorStateManager()),
-                    new ActorId(Guid.NewGuid()));
-                await target.InternalActivateAsync(codePackageContext);
-                return target;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
+        
     }
 }

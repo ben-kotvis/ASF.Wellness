@@ -62,6 +62,14 @@
       <HintPath>..\packages\Microsoft.ServiceFabric.Services.2.4.164\lib\net45\Microsoft.ServiceFabric.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ServiceFabric.Services.Wcf, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
+      <HintPath>..\packages\Microsoft.ServiceFabric.Services.Wcf.2.4.164\lib\net45\Microsoft.ServiceFabric.Services.Wcf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceFabric.Mocks, Version=1.6.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\ServiceFabric.Mocks.1.6.0\lib\net451\ServiceFabric.Mocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ServiceFabricServiceModel, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=AMD64">
       <HintPath>..\packages\Microsoft.ServiceFabric.Actors.2.4.164\lib\net45\ServiceFabricServiceModel.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +85,7 @@
     </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -91,6 +100,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FixtureBase.cs" />
     <Compile Include="ParticipantActorFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,10 +115,6 @@
     <ProjectReference Include="..\ASF.Wellness.Participant\ASF.Wellness.Participant.csproj">
       <Project>{b3358072-1b37-4642-ad97-9d12bc5f769a}</Project>
       <Name>ASF.Wellness.Participant</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mocks\Mocks.csproj">
-      <Project>{00e00484-bd00-40cd-b2cc-1cfa8e893972}</Project>
-      <Name>Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
