@@ -1,4 +1,5 @@
 ﻿using ASF.Wellness.Domain;
+using ASF.Wellness.Participant.Test.Infrastructure;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
 using Microsoft.ServiceFabric.Actors.Runtime;
@@ -16,13 +17,13 @@ namespace ASF.Wellness.Participant.Test
 {
     public abstract class FixtureBase
     {
-        protected static MockActorProxyFactory _actorProxyFactory;        
+        protected static MyMockActorProxyFactoryWrapper _actorProxyFactory;        
         protected static MockServiceProxyFactory _serviceProxyFactory;
         protected static IRepositoryFactories _factories;
 
         static FixtureBase()
         {
-            _actorProxyFactory = new MockActorProxyFactory();      
+            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();      
             
 
             _serviceProxyFactory = new MockServiceProxyFactory();
@@ -36,7 +37,7 @@ namespace ASF.Wellness.Participant.Test
         [TestCleanup]
         public void Cleanup()
         {
-            _actorProxyFactory = new MockActorProxyFactory();
+            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();
             _serviceProxyFactory = new MockServiceProxyFactory();
         }
         protected async Task<ApprovalActor> CreateApprovalActor(ActorId id)

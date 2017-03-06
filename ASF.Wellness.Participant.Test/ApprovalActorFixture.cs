@@ -11,6 +11,7 @@ using ASF.Wellness.Participant.Domain;
 using ASF.Wellness.Participant;
 using System.Numerics;
 using ServiceFabric.Mocks;
+using ASF.Wellness.Participant.Test.Infrastructure;
 
 namespace ASF.Wellness.Participant.Test
 {
@@ -23,6 +24,8 @@ namespace ASF.Wellness.Participant.Test
         [TestMethod]
         public async Task approve_submissions()
         {
+
+            _actorProxyFactory.MisingActor += actorProxyFactory_MisingActor;
             ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
 
             var currentDate = DateTimeOffset.UtcNow;
@@ -36,7 +39,13 @@ namespace ASF.Wellness.Participant.Test
             
         }
 
-        
-        
+        private void actorProxyFactory_MisingActor(object sender, Infrastructure.MisingActorEventArgs args)
+        {
+            var registrar = (MyMockActorProxyFactoryWrapper)sender;
+            Func<ActorService, ActorId, ActorBase> actorFactory = (service, actorId) => new ApprovalActor(service, actorId, _actorProxyFactory, _serviceProxyFactory, _factories);
+            var svc = MockActorServiceFactory.CreateActorServiceForActor<ApprovalActor>(actorFactory);
+            var actor = svc.Activate(args.Id);
+            registrar.RegisterActor(actor);
+        }
     }
 }

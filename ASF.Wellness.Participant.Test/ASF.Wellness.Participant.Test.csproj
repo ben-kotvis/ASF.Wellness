@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="FixtureBase.cs" />
     <Compile Include="ApprovalActorFixture.cs" />
+    <Compile Include="Infrastructure\MyMockActorProxyFactory.cs" />
     <Compile Include="ParticipantActorFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
