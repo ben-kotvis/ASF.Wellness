@@ -79,7 +79,11 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApprovalSubmission.cs" />
+    <Compile Include="ApprovalRejection.cs" />
     <Compile Include="Approval.cs" />
+    <Compile Include="ApprovalActorState.cs" />
+    <Compile Include="IApproval.cs" />
     <Compile Include="ParticipantActivity.cs" />
     <Compile Include="ParticipantEvent.cs" />
     <Compile Include="MonthParticipations.cs" />

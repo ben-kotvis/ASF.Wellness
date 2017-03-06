@@ -4,6 +4,8 @@ using System.Fabric;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+using Microsoft.ServiceFabric.Actors.Client;
 
 namespace ASF.Wellness.Participant
 {
@@ -21,8 +23,16 @@ namespace ASF.Wellness.Participant
                 // are automatically populated when you build this project.
                 // For more information, see https://aka.ms/servicefabricactorsplatform
 
+
+                var actorProxyFactory = new ActorProxyFactory();
+                var serviceProxyFactory = new ServiceProxyFactory();
+
                 ActorRuntime.RegisterActorAsync<ParticipantActor>(
-                   (context, actorType) => new ActorService(context, actorType)).GetAwaiter().GetResult();
+                   (context, actorType) => new CustomActorService(context, actorType, actorProxyFactory, serviceProxyFactory, null)).GetAwaiter().GetResult();
+
+
+                ActorRuntime.RegisterActorAsync<ApprovalActor>(
+                   (context, actorType) => new CustomActorService(context, actorType, actorProxyFactory, serviceProxyFactory, null)).GetAwaiter().GetResult();
 
                 Thread.Sleep(Timeout.Infinite);
             }

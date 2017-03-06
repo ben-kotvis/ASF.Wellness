@@ -4,6 +4,9 @@
     <Parameter Name="ParticipantActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="ParticipantActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ParticipantActorService_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ApprovalActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="ApprovalActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ApprovalActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -15,6 +18,11 @@
     <Service Name="ParticipantActorService" GeneratedIdRef="0849b94c-416c-4c04-9888-72daa2dd20be|Persisted">
       <StatefulService ServiceTypeName="ParticipantActorServiceType" TargetReplicaSetSize="[ParticipantActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ParticipantActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[ParticipantActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="ApprovalActorService" GeneratedIdRef="4b3f7acf-dac9-4d6c-ab7e-052b4f612400|Persisted">
+      <StatefulService ServiceTypeName="ApprovalActorServiceType" TargetReplicaSetSize="[ApprovalActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ApprovalActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ApprovalActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
     <!-- The section below creates instances of service types, when an instance of this 

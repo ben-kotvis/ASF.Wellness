@@ -14,5 +14,7 @@ namespace ASF.Wellness.Participant.Domain
         Task AddEvent(ParticipantEvent participantEvent);
 
         Task<MonthParticipations> GetMonthParticipations(int month, int year);
+
+        Task SubmitForApproval(int month, int year);
     }
 }

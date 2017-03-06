@@ -7,5 +7,12 @@
   <Section Name="ParticipantActorServiceReplicatorSecurityConfig">
     <Parameter Name="CredentialType" Value="None" />
   </Section>
+  <Section Name="ApprovalActorServiceReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="ApprovalActorServiceReplicatorEndpoint" />
+    <Parameter Name="BatchAcknowledgementInterval" Value="0.005" />
+  </Section>
+  <Section Name="ApprovalActorServiceReplicatorSecurityConfig">
+    <Parameter Name="CredentialType" Value="None" />
+  </Section>
   <!-- The content will be generated during build -->
 </Settings>

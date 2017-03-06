@@ -10,6 +10,7 @@ using ASF.Wellness.Participant.Domain;
 using ASF.Wellness.Participant.Domain.Validation;
 using System.Fabric;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
+using ASF.Wellness.Domain;
 
 namespace ASF.Wellness.Participant
 {
@@ -22,19 +23,18 @@ namespace ASF.Wellness.Participant
     ///  - None: State is kept in memory only and not replicated.
     /// </remarks>
     [StatePersistence(StatePersistence.Persisted)]
-    public class ParticipantActor : Actor, IParticipant
+    public class ParticipantActor : ActorBase, IParticipant
     {
         private const string ParticipationsKeyName = "Participations";
         private const string ApprovalsKeyName = "Approvals";
         private const string SubscriberKeyName = "Subscriber";
-
-
+        
         /// <summary>
         /// Initializes a new instance of Participant
         /// </summary>
         /// <param name="actorService">The Microsoft.ServiceFabric.Actors.Runtime.ActorService that will host this actor instance.</param>
         /// <param name="actorId">The Microsoft.ServiceFabric.Actors.ActorId for this actor instance.</param>
-        public ParticipantActor(ActorService actorService, ActorId actorId)
+        public ParticipantActor(CustomActorService actorService, ActorId actorId)
             : base(actorService, actorId)
         {
         }
@@ -57,6 +57,26 @@ namespace ASF.Wellness.Participant
 
         }
         
+        public async Task SubmitForApproval(int month, int year)
+        {
+            var participations = await this.StateManager.GetStateAsync<Participations>(ParticipationsKeyName);
+
+            var activities = participations.Activities.Where(i => !i.Approved && i.Date.Month == month && i.Date.Year == year);
+
+            var events = participations.Events.Where(i => !i.Approved && i.Date.Month == month && i.Date.Year == year);
+
+
+            var submission = new ApprovalSubmission()
+            {
+                Activities = activities.Select(i => i.Id).ToList(),
+                Events = events.Select(i => i.Id).ToList(),
+                ParticipantActorId = this.Id
+            };
+            
+            var approval = _actorProxyFactory.CreateActorProxy<IApproval>(ServiceFabricHelpers.ApprovalServiceUri, ServiceFabricHelpers.CreateActorId());
+            
+            await approval.Submit(submission);
+        }
 
         public async Task AddActivity(ParticipantActivity participantActivity)
         {

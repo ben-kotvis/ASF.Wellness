@@ -4,5 +4,8 @@
     <Parameter Name="ParticipantActorService_PartitionCount" Value="1" />
     <Parameter Name="ParticipantActorService_TargetReplicaSetSize" Value="1" />
     <Parameter Name="ParticipantActorService_MinReplicaSetSize" Value="1" />
+    <Parameter Name="ApprovalActorService_PartitionCount" Value="1" />
+    <Parameter Name="ApprovalActorService_TargetReplicaSetSize" Value="1" />
+    <Parameter Name="ApprovalActorService_MinReplicaSetSize" Value="1" />
   </Parameters>
 </Application>
