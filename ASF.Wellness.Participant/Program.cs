@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using Microsoft.ServiceFabric.Actors.Client;
+using ASF.Wellness.Domain;
 
 namespace ASF.Wellness.Participant
 {
@@ -26,13 +27,16 @@ namespace ASF.Wellness.Participant
 
                 var actorProxyFactory = new ActorProxyFactory();
                 var serviceProxyFactory = new ServiceProxyFactory();
+                IRepositoryFactories factories = null;
 
                 ActorRuntime.RegisterActorAsync<ParticipantActor>(
-                   (context, actorType) => new CustomActorService(context, actorType, actorProxyFactory, serviceProxyFactory, null)).GetAwaiter().GetResult();
+                   (context, actorType) => new ActorService(context, actorType, (service, actorId) => 
+                   new ParticipantActor(service, actorId, actorProxyFactory, serviceProxyFactory, factories))).GetAwaiter().GetResult();
 
 
                 ActorRuntime.RegisterActorAsync<ApprovalActor>(
-                   (context, actorType) => new CustomActorService(context, actorType, actorProxyFactory, serviceProxyFactory, null)).GetAwaiter().GetResult();
+                   (context, actorType) => new ActorService(context, actorType,(service, actorId) => 
+                   new ApprovalActor(service, actorId, actorProxyFactory, serviceProxyFactory, factories))).GetAwaiter().GetResult();
 
                 Thread.Sleep(Timeout.Infinite);
             }

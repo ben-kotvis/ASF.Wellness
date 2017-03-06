@@ -34,8 +34,8 @@ namespace ASF.Wellness.Participant
         /// </summary>
         /// <param name="actorService">The Microsoft.ServiceFabric.Actors.Runtime.ActorService that will host this actor instance.</param>
         /// <param name="actorId">The Microsoft.ServiceFabric.Actors.ActorId for this actor instance.</param>
-        public ParticipantActor(CustomActorService actorService, ActorId actorId)
-            : base(actorService, actorId)
+        public ParticipantActor(ActorService actorService, ActorId actorId, IActorProxyFactory actorProxyFactory, IServiceProxyFactory serviceProxyFactory, IRepositoryFactories factories)
+            : base(actorService, actorId, actorProxyFactory, serviceProxyFactory, factories)
         {
         }
 

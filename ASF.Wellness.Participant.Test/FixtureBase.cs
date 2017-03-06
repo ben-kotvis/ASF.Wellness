@@ -41,31 +41,23 @@ namespace ASF.Wellness.Participant.Test
         }
         protected async Task<ApprovalActor> CreateApprovalActor(ActorId id)
         {
-            Func<CustomActorService, ActorId, ApprovalActor> result = (service, actorId) => new ApprovalActor(service, actorId);
+            Func<ActorService, ActorId, ApprovalActor> result = (service, actorId) => new ApprovalActor(service, actorId, _actorProxyFactory, _serviceProxyFactory, null);
             var actor = await CreateActorConditional<ApprovalActor>(id, result);
             return actor;
         }
 
         protected async Task<ParticipantActor> CreateParticipantActor(ActorId id)
         {
-            Func<CustomActorService, ActorId, ParticipantActor> result = (service, actorId) => new ParticipantActor(service, actorId);
+            Func<ActorService, ActorId, ParticipantActor> result = (service, actorId) => new ParticipantActor(service, actorId, _actorProxyFactory, _serviceProxyFactory, null);
             var actor = await CreateActorConditional<ParticipantActor>(id, result);
             return actor;
         }
 
-        private async Task<T> CreateActorConditional<T>(ActorId id, Func<CustomActorService, ActorId, ActorBase> funcOverride)
+        private async Task<T> CreateActorConditional<T>(ActorId id, Func<ActorService, ActorId, ActorBase> funcOverride)
             where T : Actor, IActor
         {
-            var stateManager = new MockActorStateManager();
-            Func<Microsoft.ServiceFabric.Actors.Runtime.ActorBase, IActorStateProvider, IActorStateManager> stateManagerFactory = (actr, stateProvider) => stateManager;
-
-            IActorStateProvider actorStateProvider = new MockActorStateProvider();
-            actorStateProvider.Initialize(ActorTypeInformation.Get(typeof(T)));
-
-            var context = MockStatefulServiceContextFactory.Default;
-
-            var customActorService = new CustomActorService(context, ActorTypeInformation.Get(typeof(T)), _actorProxyFactory, _serviceProxyFactory, _factories, null, stateManagerFactory); 
-            var actor = customActorService.Activate<T>(id);
+            var svc = MockActorServiceFactory.CreateActorServiceForActor<T>(funcOverride);
+            var actor = svc.Activate<T>(id);
             await actor.InvokeOnActivateAsync();
 
             _actorProxyFactory.RegisterActor(actor);
