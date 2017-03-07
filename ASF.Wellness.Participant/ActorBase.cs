@@ -11,6 +11,7 @@ using ASF.Wellness.Participant.Domain.Validation;
 using System.Fabric;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using ASF.Wellness.Domain;
+using ASF.Wellness.Domain.Repositories;
 
 namespace ASF.Wellness.Participant
 {

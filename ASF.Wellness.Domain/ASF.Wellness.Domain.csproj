@@ -81,7 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="IRepositoryFactories.cs" />
+    <Compile Include="Repositories\IMessageRepository.cs" />
+    <Compile Include="Repositories\IRepositoryFactories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="ServiceFabricHelpers.cs" />

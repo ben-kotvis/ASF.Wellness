@@ -1,4 +1,5 @@
 ﻿using ASF.Wellness.Domain;
+using ASF.Wellness.Domain.Repositories;
 using ASF.Wellness.Participant.Test.Infrastructure;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Client;
@@ -20,18 +21,30 @@ namespace ASF.Wellness.Participant.Test
         protected static MyMockActorProxyFactoryWrapper _actorProxyFactory;        
         protected static MockServiceProxyFactory _serviceProxyFactory;
         protected static IRepositoryFactories _factories;
+        protected static Dictionary<string, string> _messageDictionary;
+
 
         static FixtureBase()
         {
-            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();      
-            
+            _messageDictionary = new Dictionary<string, string>();
 
+            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();
             _serviceProxyFactory = new MockServiceProxyFactory();
 
             var repositoryFactoryMock = new Mock<IRepositoryFactories>();
-            
+
+            var repositoryMock = new Mock<IMessageRepository>();
+            repositoryMock.Setup(i => i.Send(It.IsAny<string>(), It.IsAny<string>())).Returns((string s, string y) => MockSendMessage(s, y));
+
+            repositoryFactoryMock.Setup(f => f.CreateMessageRepository()).Returns(repositoryMock.Object);
+
             // setup repositories when you can
             _factories = repositoryFactoryMock.Object;
+        }
+
+        private static async Task MockSendMessage(string r, string m)
+        {
+            _messageDictionary.Add(r, m);
         }
 
         [TestCleanup]

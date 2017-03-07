@@ -11,6 +11,7 @@ using ASF.Wellness.Participant.Domain.Validation;
 using System.Fabric;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using ASF.Wellness.Domain;
+using ASF.Wellness.Domain.Repositories;
 
 namespace ASF.Wellness.Participant
 {
@@ -57,7 +58,10 @@ namespace ASF.Wellness.Participant
 
         public async Task Submit(ApprovalSubmission submission)
         {
-
+            // lookup the approver
+            var messageRepository = _factories.CreateMessageRepository();
+            await messageRepository.Send("recipient", "message");
+            
         }
 
         public async Task Approve()

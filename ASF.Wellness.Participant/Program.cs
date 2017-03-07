@@ -7,6 +7,7 @@ using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using Microsoft.ServiceFabric.Actors.Client;
 using ASF.Wellness.Domain;
+using ASF.Wellness.Domain.Repositories;
 
 namespace ASF.Wellness.Participant
 {

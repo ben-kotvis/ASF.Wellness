@@ -35,7 +35,7 @@ namespace ASF.Wellness.Participant.Test
 
 
             await target.SubmitForApproval(currentDate.Month, currentDate.Year);
-
+            Assert.IsTrue(_messageDictionary.ContainsKey("recipient"));
             
         }
 

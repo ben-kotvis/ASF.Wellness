@@ -6,11 +6,11 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASF.Wellness.Domain
+namespace ASF.Wellness.Domain.Repositories
 {
     public interface IRepositoryFactories
     {
-
+        IMessageRepository CreateMessageRepository();
     }
     
 }
