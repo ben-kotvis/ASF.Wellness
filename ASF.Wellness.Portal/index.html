@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Wellness Portal</title>
+	<meta charset="utf-8" />
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="firebase/firebase.js"></script>
+</head>
+<body>
+    <home [something]="currentUser">Loading...</home>
+    <script>
+        System.config({
+            packages: {
+                'app': { defaultExtension: 'js'},
+                'firebase': { defaultExtension: 'js'}
+            }
+        });
+        System.import('app/app');
+    </script>
+</body>
+</html>

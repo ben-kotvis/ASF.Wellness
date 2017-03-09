@@ -46,9 +46,11 @@ namespace ASF.Wellness.Participant.Test
                 monthChanger = 1;
             }
 
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
-            current.Activities.Add(new ParticipantActivity() { Points = 1, Date = currentDate });
+            var record = current.Records.FirstOrDefault();
+
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
+            record.Activities.Add(new ParticipantActivity() { Points = 1, Date = currentDate });
 
             await target.StateManager.SetStateAsync(ParticipationsKeyName, current);
 
@@ -72,9 +74,10 @@ namespace ASF.Wellness.Participant.Test
                 monthChanger = 1;
             }
 
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
-            current.Activities.Add(new ParticipantActivity() { Points = 1, Date = currentDate });
+            var record = current.Records.FirstOrDefault();
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
+            record.Activities.Add(new ParticipantActivity() { Points = 1, Date = currentDate });
 
             await target.StateManager.SetStateAsync(ParticipationsKeyName, current);
 
@@ -92,10 +95,11 @@ namespace ASF.Wellness.Participant.Test
 
             var current = await target.StateManager.GetStateAsync<Participations>(ParticipationsKeyName);
 
+            var record = current.Records.FirstOrDefault();
             current.StartDate = DateTimeOffset.UtcNow.AddYears(-1);
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(-1) });
-            current.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
-            current.Activities.Add(new ParticipantActivity() { Points = 11, Date = currentDate });
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(-1) });
+            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
+            record.Activities.Add(new ParticipantActivity() { Points = 11, Date = currentDate });
 
             await target.StateManager.SetStateAsync(ParticipationsKeyName, current);
 

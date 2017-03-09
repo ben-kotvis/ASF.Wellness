@@ -11,11 +11,8 @@ namespace ASF.Wellness.Participant.Domain
     public class Participations
     {
         [DataMember]
-        public List<ParticipantEvent> Events { get; set; }
-
-        [DataMember]
-        public List<ParticipantActivity> Activities { get; set; }
-
+        public List<ParticipationMonthYear> Records { get; set; }
+        
         [DataMember]
         public DateTimeOffset StartDate { get; set; }
     }

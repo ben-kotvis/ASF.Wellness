@@ -5,12 +5,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASF.Wellness.Participant.Domain
+namespace ASF.Wellness.Domain
 {
     [DataContract]
-    public class ParticipantActivity : ParticipantRecord
+    public class Activity
     {
         [DataMember]
-        public int NumberOfMinutes { get; set; }
+        public string Id { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
     }
 }

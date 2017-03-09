@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 namespace ASF.Wellness.Participant.Domain
 {
     [DataContract]
-    public class Approval
+    public class ParticipationMonthYear
     {
         [DataMember]
-        public string Id { get; set; }
+        public List<ParticipantEvent> Events { get; set; }
+
+        [DataMember]
+        public List<ParticipantActivity> Activities { get; set; }
 
         [DataMember]
         public int Month { get; set; }
@@ -20,9 +23,6 @@ namespace ASF.Wellness.Participant.Domain
         public int Year { get; set; }
 
         [DataMember]
-        public string ApprovedByUserId { get; set; }
-
-        [DataMember]
-        public DateTimeOffset ApprovalDate { get; set; }
+        public List<Approval> Approvals { get; set; }
     }
 }

@@ -29,6 +29,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ASF.Services.Activities\ASF.Services.Activities.csproj" />
     <ProjectReference Include="..\ASF.Wellness.Participant\ASF.Wellness.Participant.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

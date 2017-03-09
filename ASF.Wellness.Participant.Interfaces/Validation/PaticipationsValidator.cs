@@ -19,21 +19,26 @@ namespace ASF.Wellness.Participant.Domain.Validation
 
         private ValidationFailure CheckMonthlyTotals(Participations participations)
         {
-            var activities = participations.Activities.Where(i => !i.Approved).Select(i => new { Month = i.Date.Month, Year = i.Date.Year, Points = i.Points });
 
-            var events = participations.Events.Where(i => !i.Approved).Select(i => new { Month = i.Date.Month, Year = i.Date.Year, Points = i.Points });
+            var records = participations.Records;
 
-            var combined = events.Union(activities);
-
-            foreach(var item in combined.GroupBy(i => new { i.Year, i.Month }))
+            foreach (var record in records)
             {
-                if(item.Sum(i => i.Points) > 12)
+                var activities = record.Activities.Where(i => !i.Approved).Select(i => new { Month = i.Date.Month, Year = i.Date.Year, Points = i.Points });
+
+                var events = record.Events.Where(i => !i.Approved).Select(i => new { Month = i.Date.Month, Year = i.Date.Year, Points = i.Points });
+
+                var combined = events.Union(activities);
+
+                foreach (var item in combined.GroupBy(i => new { i.Year, i.Month }))
                 {
-                    return new ValidationFailure("Activities", "Too many points per month");
+                    if (item.Sum(i => i.Points) > 12)
+                    {
+                        return new ValidationFailure("Activities", "Too many points per month");
+                    }
                 }
+
             }
-
-
             return default(ValidationFailure);
         }
         

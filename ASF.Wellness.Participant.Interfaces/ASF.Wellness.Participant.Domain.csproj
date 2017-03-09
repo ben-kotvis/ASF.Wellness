@@ -87,6 +87,8 @@
     <Compile Include="ParticipantActivity.cs" />
     <Compile Include="ParticipantEvent.cs" />
     <Compile Include="MonthParticipations.cs" />
+    <Compile Include="ParticipantRecord.cs" />
+    <Compile Include="ParticipationMonthYear.cs" />
     <Compile Include="Participations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IParticipant.cs" />
