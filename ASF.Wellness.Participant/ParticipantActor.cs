@@ -52,14 +52,7 @@ namespace ASF.Wellness.Participant
             {
                 Records = new List<ParticipationMonthYear>()
                 {
-                    new ParticipationMonthYear()
-                    {
-                        Activities = new List<ParticipantActivity>(),
-                        Events = new List<ParticipantEvent>(),
-                        Approvals = new List<Approval>(),
-                        Month = DateTimeOffset.UtcNow.Month,
-                        Year = DateTimeOffset.UtcNow.Year,                        
-                    }
+                    CreateMonthYear(DateTimeOffset.UtcNow.Month, DateTimeOffset.UtcNow.Year)
                 }
             };
 
@@ -67,6 +60,18 @@ namespace ASF.Wellness.Participant
 
         }
         
+        private ParticipationMonthYear CreateMonthYear(int month, int year)
+        {
+            return new ParticipationMonthYear()
+            {
+                Activities = new List<ParticipantActivity>(),
+                Events = new List<ParticipantEvent>(),
+                Approvals = new List<Approval>(),
+                Month = month,
+                Year = year,
+            };
+        }
+
         public async Task SubmitForApproval(int month, int year)
         {
             var participations = await this.StateManager.GetStateAsync<Participations>(ActorStateKeyName);
@@ -90,6 +95,13 @@ namespace ASF.Wellness.Participant
             
             var participations = await this.StateManager.GetStateAsync<Participations>(ActorStateKeyName);
             var records = participations.Records.FirstOrDefault(i => i.Month == participantActivity.Date.Month && i.Year == participantActivity.Date.Year);
+            
+            if (records == null)
+            {
+                records = CreateMonthYear(participantActivity.Date.Month, participantActivity.Date.Year);
+                participations.Records.Add(records);
+            }
+
             records.Activities.Add(participantActivity);
 
             var validator = new PaticipationsValidator();
@@ -110,6 +122,13 @@ namespace ASF.Wellness.Participant
         {
             var participations = await this.StateManager.GetStateAsync<Participations>(ActorStateKeyName);
             var records = participations.Records.FirstOrDefault(i => i.Month == participantEvent.Date.Month && i.Year == participantEvent.Date.Year);
+
+            if(records == null)
+            {
+                records = CreateMonthYear(participantEvent.Date.Month, participantEvent.Date.Year);
+                participations.Records.Add(records);
+            }
+
             records.Events.Add(participantEvent);
             var validator = new PaticipationsValidator();
             var result = await validator.ValidateAsync(participations);
@@ -129,6 +148,11 @@ namespace ASF.Wellness.Participant
             var participations = await this.StateManager.GetStateAsync<Participations>(ActorStateKeyName);
 
             var records = participations.Records.FirstOrDefault(i => i.Month == month && i.Year == year);
+
+            if(records == null)
+            {
+                return new MonthParticipations();
+            }
 
             var activities = records.Activities.Where(i => !i.Approved).Select(i => new { Month = i.Date.Month, Year = i.Date.Year, Points = i.Points, Id = i.Id });
 

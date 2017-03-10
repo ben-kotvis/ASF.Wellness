@@ -12,7 +12,9 @@ namespace ASF.Wellness.Domain
         {
             public const string ParticipantActorServiceKeyName = "ParticipantActorService";
             public const string ApprovalActorServiceKeyName = "ApprovalActorService";
+            public const string ActivitiesServiceName = "Activities";
             public const string ApplicationName = "ASF.Wellness";
+
         }
         public static class Formats
         {

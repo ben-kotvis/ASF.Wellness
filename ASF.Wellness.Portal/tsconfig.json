@@ -8,6 +8,7 @@
   "files": [
     "app/app.ts",
     "app/Services/app.Services.Api.ts",
-    "app/Model/app.Model.Activity.ts"
+    "app/Model/app.Model.Activity.ts",
+    "app/Common/app.Common.Constants.ts"
   ]
 }

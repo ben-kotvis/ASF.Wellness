@@ -23,7 +23,12 @@ namespace ASF.Wellness.Domain
         {
             get { return ServiceUri(Constants.ServiceNames.ParticipantActorServiceKeyName); }
         }
-        
+
+        public static Uri ActivitiesServiceUri
+        {
+            get { return ServiceUri(Constants.ServiceNames.ActivitiesServiceName); }
+        }
+
         public static ActorId CreateActorId()
         {
             return new ActorId(Guid.NewGuid());

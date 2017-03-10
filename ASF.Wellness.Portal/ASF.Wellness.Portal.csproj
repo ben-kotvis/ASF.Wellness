@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\Common\app.Common.Constants.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Activity.ts" />
     <TypeScriptCompile Include="app\Services\app.Services.Api.ts" />
     <TypeScriptCompile Include="firebase\angularfire.d.ts" />

@@ -1,16 +1,27 @@
-﻿
-import { Activity } from '../Model/app.Model.Activity';
+﻿import { Activity } from '../Model/app.Model.Activity';
+import { Constants } from '../Common/app.Common.Constants';
+import { Http } from 'angular2/http';
+import { Injectable } from 'angular2/core';
 
+@Injectable()
 export class ApiService {
 
-    getActivities(): Array<Activity> {
+    constructor(private http: Http) {
+    }
+    
 
-        var activities = new Array<Activity>();
+    getActivities(): Promise<Activity[]> {    
 
-        activities.push({ name: "One", id: "" });
-        activities.push({ name: "Two", id: "" });
+        return this.http.get(Constants.activitiesPath())
+            .toPromise()
+            .then(response => response.json() as Activity[])
+            .catch(this.handleError);
 
-        return activities;
+    }
+
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
     }
 }
 

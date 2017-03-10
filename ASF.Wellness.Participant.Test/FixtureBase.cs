@@ -18,7 +18,7 @@ namespace ASF.Wellness.Participant.Test
 {
     public abstract class FixtureBase
     {
-        protected static MyMockActorProxyFactoryWrapper _actorProxyFactory;        
+        protected static MockActorProxyFactory _actorProxyFactory;        
         protected static MockServiceProxyFactory _serviceProxyFactory;
         protected static IRepositoryFactories _factories;
         protected static Dictionary<string, string> _messageDictionary;
@@ -28,7 +28,7 @@ namespace ASF.Wellness.Participant.Test
         {
             _messageDictionary = new Dictionary<string, string>();
 
-            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();
+            _actorProxyFactory = new MockActorProxyFactory();
             _serviceProxyFactory = new MockServiceProxyFactory();
 
             var repositoryFactoryMock = new Mock<IRepositoryFactories>();
@@ -50,7 +50,7 @@ namespace ASF.Wellness.Participant.Test
         [TestCleanup]
         public void Cleanup()
         {
-            _actorProxyFactory = new MyMockActorProxyFactoryWrapper();
+            _actorProxyFactory = new MockActorProxyFactory();
             _serviceProxyFactory = new MockServiceProxyFactory();
         }
         protected async Task<ApprovalActor> CreateApprovalActor(ActorId id)

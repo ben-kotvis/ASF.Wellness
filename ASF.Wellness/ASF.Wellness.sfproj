@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ASF.Services.Activities\ASF.Services.Activities.csproj" />
+    <ProjectReference Include="..\ASF.Wellness.API\ASF.Wellness.API.csproj" />
     <ProjectReference Include="..\ASF.Wellness.Participant\ASF.Wellness.Participant.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

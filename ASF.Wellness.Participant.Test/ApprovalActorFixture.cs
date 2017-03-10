@@ -11,7 +11,7 @@ using ASF.Wellness.Participant.Domain;
 using ASF.Wellness.Participant;
 using System.Numerics;
 using ServiceFabric.Mocks;
-using ASF.Wellness.Participant.Test.Infrastructure;
+//using ASF.Wellness.Participant.Test.Infrastructure;
 
 namespace ASF.Wellness.Participant.Test
 {
@@ -25,7 +25,7 @@ namespace ASF.Wellness.Participant.Test
         public async Task approve_submissions()
         {
 
-            _actorProxyFactory.MisingActor += actorProxyFactory_MisingActor;
+            _actorProxyFactory.MissingActor += actorProxyFactory_MissingActor;
             ParticipantActor target = await CreateParticipantActor(ActorId.CreateRandom());
 
             var currentDate = DateTimeOffset.UtcNow;
@@ -38,10 +38,10 @@ namespace ASF.Wellness.Participant.Test
             Assert.IsTrue(_messageDictionary.ContainsKey("recipient"));
             
         }
-
-        private void actorProxyFactory_MisingActor(object sender, Infrastructure.MisingActorEventArgs args)
+        
+        private void actorProxyFactory_MissingActor(object sender, MissingActorEventArgs args)
         {
-            var registrar = (MyMockActorProxyFactoryWrapper)sender;
+            var registrar = (MockActorProxyFactory)sender;
             Func<ActorService, ActorId, ActorBase> actorFactory = (service, actorId) => new ApprovalActor(service, actorId, _actorProxyFactory, _serviceProxyFactory, _factories);
             var svc = MockActorServiceFactory.CreateActorServiceForActor<ApprovalActor>(actorFactory);
             var actor = svc.Activate(args.Id);

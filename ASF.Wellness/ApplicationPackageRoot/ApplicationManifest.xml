@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ASF.WellnessType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="Activities_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="API_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="Activities_MinReplicaSetSize" DefaultValue="1" />
     <Parameter Name="Activities_PartitionCount" DefaultValue="1" />
-    <Parameter Name="Activities_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="Activities_TargetReplicaSetSize" DefaultValue="1" />
     <Parameter Name="ParticipantActorService_PartitionCount" DefaultValue="10" />
     <Parameter Name="ParticipantActorService_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="ParticipantActorService_TargetReplicaSetSize" DefaultValue="3" />
@@ -15,6 +16,10 @@
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ASF.Wellness.APIPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ASF.Services.ActivitiesPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
   </ServiceManifestImport>
@@ -22,9 +27,14 @@
     <ServiceManifestRef ServiceManifestName="ASF.Wellness.ParticipantPkg" ServiceManifestVersion="1.0.0" />
   </ServiceManifestImport>
   <DefaultServices>
+    <Service Name="API">
+      <StatelessService ServiceTypeName="APIType" InstanceCount="[API_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
     <Service Name="Activities">
       <StatefulService ServiceTypeName="ActivitiesType" TargetReplicaSetSize="[Activities_TargetReplicaSetSize]" MinReplicaSetSize="[Activities_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[Activities_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <SingletonPartition />
       </StatefulService>
     </Service>
     <Service Name="ParticipantActorService" GeneratedIdRef="0849b94c-416c-4c04-9888-72daa2dd20be|Persisted">

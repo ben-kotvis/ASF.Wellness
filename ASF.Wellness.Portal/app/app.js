@@ -10,12 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var angular2_1 = require('angular2/angular2');
 var app_Services_Api_1 = require('../app/Services/app.Services.Api');
+var http_1 = require('angular2/http');
 var TodoApp = (function () {
-    function TodoApp(apiService) {
+    function TodoApp(http, apiService) {
+        var _this = this;
+        this.http = http;
+        this.apiService = apiService;
         this.something = { prop1: "Hello" };
         this.todoEdit = null;
         this.title = "Hello world";
-        this.activities = apiService.getActivities();
+        this.apiService.getActivities().then(function (response) { return _this.activities = response; });
     }
     __decorate([
         angular2_1.Input(), 
@@ -26,9 +30,9 @@ var TodoApp = (function () {
             selector: 'home',
             directives: [angular2_1.NgFor],
             templateUrl: 'home.html',
-            providers: [app_Services_Api_1.ApiService]
+            providers: [app_Services_Api_1.ApiService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [app_Services_Api_1.ApiService])
+        __metadata('design:paramtypes', [http_1.Http, app_Services_Api_1.ApiService])
     ], TodoApp);
     return TodoApp;
 }());

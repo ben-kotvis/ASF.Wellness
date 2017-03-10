@@ -18,7 +18,7 @@ namespace ASF.Wellness.Participant.Test
     public class ParticipantActorFixture : FixtureBase
     {
 
-        private const string ParticipationsKeyName = "Participations";
+        private const string ParticipationsKeyName = "ActorState";
 
         [TestMethod]
         public async Task validate_new_actor_has_no_participations()
@@ -66,7 +66,6 @@ namespace ASF.Wellness.Participant.Test
 
             var currentDate = DateTimeOffset.UtcNow;
 
-            var current = await target.StateManager.GetStateAsync<Participations>(ParticipationsKeyName);
 
             int monthChanger = -1;
             if (currentDate.Month == 1)
@@ -74,13 +73,12 @@ namespace ASF.Wellness.Participant.Test
                 monthChanger = 1;
             }
 
-            var record = current.Records.FirstOrDefault();
-            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
-            record.Events.Add(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
-            record.Activities.Add(new ParticipantActivity() { Points = 1, Date = currentDate });
+            await target.AddEvent(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate.AddMonths(monthChanger) });
+            await target.AddEvent(new ParticipantEvent() { Id = Guid.NewGuid().ToString(), Points = 1, Date = currentDate });
+            await target.AddActivity(new ParticipantActivity() { Points = 1, Date = currentDate });
 
-            await target.StateManager.SetStateAsync(ParticipationsKeyName, current);
-
+            var current = await target.StateManager.GetStateAsync<Participations>(ParticipationsKeyName);
+            
             var participations = await target.GetMonthParticipations(currentDate.Month, currentDate.Year);
             Assert.AreEqual(2, participations.MonthTotalPoints);
         }
