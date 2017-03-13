@@ -1,20 +1,29 @@
 {
   "name": "wellness-portal",
-  "version": "1.0.0",
-  "description": "Angular 2/TypeScript demo",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kotvisbj/ASF.Wellness.git"
+  "version": "0.0.0",
+  "scripts": {
+    "postinstall": "typings install",
+    "typings": "typings"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "typings": "^0.8.1"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.44",
-    "systemjs": "0.19.5",
-    "http-server": "0.8.0"
-  },
-  "devDependencies": {
-    "typescript": "^2.3.0-dev.20170308"
-  },
-  "scripts": {
-    "start": "node node_modules/typescript/lib/tsc.js && node node_modules/http-server/bin/http-server -o"
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "@angular/router-deprecated": "2.0.0-rc.1",
+    "@angular/upgrade": "2.0.0-rc.1",
+    "@types/core-js": "^0.9.37",
+    "angular2-in-memory-web-api": "0.0.9",
+    "core-js": "^2.4.0",
+    "rxjs": "5.0.0-beta.6",
+    "systemjs": "0.19.27",
+    "zone.js": "^0.6.12"
   }
 }

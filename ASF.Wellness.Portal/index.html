@@ -3,19 +3,30 @@
 <head>
     <title>Wellness Portal</title>
 	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="Scripts/bootstrap.js" ></script>
+    <script src="Scripts/modernizr-2.6.2.js" ></script>
+    <script src="Scripts/respond.js" ></script>
+
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+
 </head>
 <body>
-    <home [something]="currentUser">Loading...</home>
+    <home>Loading...</home>
+ 
+    <script src="systemjs.config.js"></script>
     <script>
-        System.config({
-            packages: {
-                'app': { defaultExtension: 'js'}
-            }
-        });
-        System.import('app/app');
+
+        System.import('app').catch(function (err) { console.error(err); });
+    </script>
+    <script>
+        System.import('app/app.Module');
     </script>
 </body>
 </html>

@@ -5,3 +5,4 @@ var Activity = (function () {
     return Activity;
 }());
 exports.Activity = Activity;
+//# sourceMappingURL=app.Model.Activity.js.map

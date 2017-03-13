@@ -8,22 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var http_1 = require('@angular/http');
+var core_1 = require('@angular/core');
+require('rxjs/RX');
 var app_Common_Constants_1 = require('../Common/app.Common.Constants');
-var http_1 = require('angular2/http');
-var core_1 = require('angular2/core');
 var ApiService = (function () {
     function ApiService(http) {
         this.http = http;
     }
     ApiService.prototype.getActivities = function () {
-        return this.http.get(app_Common_Constants_1.Constants.activitiesPath())
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    ApiService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
+        var url = app_Common_Constants_1.Constants.activitiesPath();
+        return this.http.get(url).map(function (r) { return r.json(); });
+        //.map((res: Response, index: number) => res.json() as Activity[]);        
+        //.then((res:Response) => res.json() as Activity[]);
+        //.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     };
     ApiService = __decorate([
         core_1.Injectable(), 
@@ -32,3 +30,4 @@ var ApiService = (function () {
     return ApiService;
 }());
 exports.ApiService = ApiService;
+//# sourceMappingURL=app.Services.Api.js.map

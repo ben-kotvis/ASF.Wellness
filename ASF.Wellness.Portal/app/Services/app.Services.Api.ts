@@ -1,7 +1,11 @@
-﻿import { Activity } from '../Model/app.Model.Activity';
+﻿import { Headers, Http, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/RX';
+
+import { Activity } from '../Model/app.Model.Activity';
 import { Constants } from '../Common/app.Common.Constants';
-import { Http } from 'angular2/http';
-import { Injectable } from 'angular2/core';
 
 @Injectable()
 export class ApiService {
@@ -10,18 +14,19 @@ export class ApiService {
     }
     
 
-    getActivities(): Promise<Activity[]> {    
+    getActivities() : Observable<Activity[]> {    
+            
+        var url = Constants.activitiesPath();
+        
+        return this.http.get(url).map(r => r.json() as Activity[]);
+        
 
-        return this.http.get(Constants.activitiesPath())
-            .toPromise()
-            .then(response => response.json() as Activity[])
-            .catch(this.handleError);
-
+            //.map((res: Response, index: number) => res.json() as Activity[]);        
+        
+            //.then((res:Response) => res.json() as Activity[]);
+        //.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        
     }
-
-    private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    }
+    
 }
 
