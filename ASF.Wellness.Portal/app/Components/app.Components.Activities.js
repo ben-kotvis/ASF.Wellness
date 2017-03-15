@@ -12,13 +12,14 @@ var core_1 = require('@angular/core');
 var app_Services_Api_1 = require('../Services/app.Services.Api');
 var ActivitiesComponent = (function () {
     function ActivitiesComponent(apiService) {
-        var _this = this;
         this.apiService = apiService;
         this.todoEdit = null;
         this.title = "Hello world";
-        this.apiService.getActivities()
-            .subscribe(function (response) { return _this.activities = response; }, function (error) { return console.error('Error: ' + error); }, function () { return console.log('Completed!'); });
     }
+    ActivitiesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
+    };
     ActivitiesComponent = __decorate([
         core_1.Component({
             selector: 'home',

@@ -10,18 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
+var Observable_1 = require('rxjs/Observable');
 require('rxjs/RX');
-var app_Common_Constants_1 = require('../Common/app.Common.Constants');
 var ApiService = (function () {
     function ApiService(http) {
         this.http = http;
     }
     ApiService.prototype.getActivities = function () {
-        var url = app_Common_Constants_1.Constants.activitiesPath();
-        return this.http.get(url).map(function (r) { return r.json(); });
-        //.map((res: Response, index: number) => res.json() as Activity[]);        
-        //.then((res:Response) => res.json() as Activity[]);
-        //.catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        /*
+        var url = Constants.activitiesPath();
+        
+        return this.http.get(url).map(r => r.json() as Activity[]);
+        */
+        var names = new Array();
+        names.push({ id: "123", name: "Hello" });
+        names.push({ id: "124", name: "World" });
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(names);
+            observer.complete();
+        });
     };
     ApiService = __decorate([
         core_1.Injectable(), 
