@@ -12,6 +12,7 @@ using System.Fabric;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using ASF.Wellness.Domain;
 using ASF.Wellness.Domain.Repositories;
+using Microsoft.ServiceFabric.Data;
 
 namespace ASF.Wellness.Participant
 {
@@ -48,15 +49,20 @@ namespace ASF.Wellness.Participant
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
 
-            var participations = new Participations()
+            ConditionalValue<Participations> state = await this.StateManager.TryGetStateAsync<Participations>(ActorStateKeyName);
+
+            if (!state.HasValue)
             {
-                Records = new List<ParticipationMonthYear>()
+                var participations = new Participations()
+                {
+                    Records = new List<ParticipationMonthYear>()
                 {
                     CreateMonthYear(DateTimeOffset.UtcNow.Month, DateTimeOffset.UtcNow.Year)
                 }
-            };
+                };
 
-            await this.StateManager.TryAddStateAsync(ActorStateKeyName, participations);
+                await this.StateManager.TryAddStateAsync(ActorStateKeyName, participations);
+            }
 
         }
         

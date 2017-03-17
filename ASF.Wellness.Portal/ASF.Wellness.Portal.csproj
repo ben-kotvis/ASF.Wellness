@@ -70,6 +70,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="package.json" />
     <Content Include="packages.config">
@@ -109,7 +110,7 @@
     <Content Include="_typingsrc" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="home.html" />
+    <Content Include="app\Components\app.Components.Activities.html" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -119,7 +120,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.Module.ts" />
     <TypeScriptCompile Include="app\Common\app.Common.Constants.ts" />
+    <TypeScriptCompile Include="app\Interfaces\app.Interfaces.Api.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.Participation.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.ParticipationActivity.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Activity.ts" />
+    <TypeScriptCompile Include="app\Services\app.Services.FakeApi.ts" />
     <TypeScriptCompile Include="app\Services\app.Services.Api.ts" />
     <TypeScriptCompile Include="app\Components\app.Components.Activities.ts" />
   </ItemGroup>

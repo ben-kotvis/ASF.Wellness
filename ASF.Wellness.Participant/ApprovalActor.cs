@@ -12,6 +12,7 @@ using System.Fabric;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 using ASF.Wellness.Domain;
 using ASF.Wellness.Domain.Repositories;
+using Microsoft.ServiceFabric.Data;
 
 namespace ASF.Wellness.Participant
 {
@@ -46,13 +47,18 @@ namespace ASF.Wellness.Participant
         protected override async Task OnActivateAsync()
         {
             ActorEventSource.Current.ActorMessage(this, "Actor activated.");
+            
+            ConditionalValue<ApprovalActorState> state = await this.StateManager.TryGetStateAsync<ApprovalActorState>(ActorStateKeyName);
 
-            _state = new ApprovalActorState()
+            if (!state.HasValue)
             {
-                CurrentStep = ApprovalActorState.Steps.Created
-            };
+                _state = new ApprovalActorState()
+                {
+                    CurrentStep = ApprovalActorState.Steps.Created
+                };
 
-            await this.StateManager.TryAddStateAsync(ActorStateKeyName, _state);
+                await this.StateManager.TryAddStateAsync(ActorStateKeyName, _state);
+            }
 
         }
 

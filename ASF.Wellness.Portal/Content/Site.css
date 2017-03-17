@@ -1,0 +1,310 @@
+﻿body {
+    padding-top:60px;
+    padding-bottom:80px;
+}
+
+
+
+
+.month-menu ul li
+{
+    text-align:center;
+}
+
+.month-menu ul
+{
+    
+    
+}
+
+.month-menu ul li:nth-child(n+2):not(:nth-last-child(-n+1)) a
+{
+	width: 145px;
+}
+
+.left
+{
+	display: table-cell;
+	padding: 5px;
+    
+    width: 17%;
+}
+.right
+{
+	display: table-cell;
+	padding: 5px;
+	vertical-align: top;
+    
+    width: 100%;
+}
+.goergous-holder
+{
+	border-color: #ddd;
+	border-width: 1px;
+	border-radius: 4px;
+	border-style: solid;
+    margin-bottom: 20px;
+}
+
+.graded {
+    background: -webkit-linear-gradient(#f8f6f6, #fff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#f8f6f6, #fff); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#f8f6f6, #fff); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#f8f6f6, #fff); /* Standard syntax (must be last) */
+}
+
+.padded {
+    padding:7px;
+}
+
+.italic {
+    font-style:italic;
+}
+
+.form-control {
+    /*width: inherit !important;*/
+}
+
+.table {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+h4 {
+    margin-left:10px;
+}
+/*
+table.wellness-table thead tr th:not(.wide) {
+    width: 10%;
+}
+*/
+table thead tr th {
+    border-bottom:none !important;
+}
+
+ul.user-search {
+    padding: 0;
+}
+
+.user-search li {
+    list-style-type: none;
+    text-decoration:none;
+    margin:5px;
+    padding:5px;
+}
+
+[ng-click], [data-ng-click] {
+    cursor:pointer;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+.wellness-nav-right{
+    margin-right: 0px !important;
+}
+
+th {
+    white-space:nowrap;
+}
+table.wellness-table tr td:first-of-type {
+    width: 55px;
+}
+
+tr.editable.editing {
+    height: 50px;
+}
+
+tr.editable td {
+    position:relative;
+}
+
+tr.editable:not(.editing) td span {   
+    display:inherit;
+}
+
+tr.editable:not(.editing) td input {   
+    display:none;
+}
+
+
+tr.editable.editing td span {   
+    display:none;
+}
+
+tr.editable.editing td input {   
+    display:inherit;
+}
+
+tr.editable td:first-of-type span {   
+    display: inline;
+    
+    cursor:pointer;
+    margin-right:4px;
+}
+
+tr.editable td:first-of-type div {
+    position: absolute;
+    top:11px;
+    left: 7px;
+    display:none;
+}
+
+tr.editable:not(.editing):hover td:first-of-type div span {
+    display:inline;
+    cursor:pointer;
+    margin-right:4px;
+}
+
+tr.editable:not(.editing):hover td:first-of-type div:not(.edit-only) {
+    display:inline;
+}
+
+tr.editable.editing .edit-only {
+    display:inline;
+}
+
+.number-text {
+    width: 75px !important;
+}
+
+.pagination {
+    margin-top: 0px !important;
+}
+
+.alert-holder {
+    position: fixed;
+    bottom:20px;
+    left:20px;
+    width: 500px;
+    z-index:5000;
+}
+
+.wellness-table td {
+    /*white-space:nowrap;*/
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.last-column-right th:last-of-type, .last-column-right td:last-of-type {
+    text-align:right;
+}
+
+.fax-control-holder {
+    position:relative;
+    width:100%;
+    text-align:right;
+    right: 5px;
+    bottom: -8px;
+}
+
+.ng-ckeditor {
+    border: 0 none;
+}
+
+
+select option {
+	color: black;
+}
+select option:first-child {
+	color: #555;
+}
+select {
+	color: #555;
+}
+/* Hidden placeholder */
+select option[disabled]:first-child {
+	display: none;
+}
+
+.temp {
+    color:#ddd;
+}
+
+header {
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+}
+
+.static-left {
+    position:fixed;
+    top:60px;
+    left:0px;
+    width: 100%;
+}
+
+
+
+
+.spinner {
+  margin: 5px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > span {
+  width: 8px;
+  height: 8px;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+
+.navbar span {    
+    color: #9d9d9d !important;
+}

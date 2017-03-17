@@ -17,19 +17,23 @@ var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/RX');
-var app_Common_Constants_1 = require('../Common/app.Common.Constants');
 var app_Interfaces_Api_1 = require('../Interfaces/app.Interfaces.Api');
-var ApiService = (function (_super) {
-    __extends(ApiService, _super);
-    function ApiService(http) {
+var FakeApiService = (function (_super) {
+    __extends(FakeApiService, _super);
+    function FakeApiService(http) {
         _super.call(this);
         this.http = http;
     }
-    ApiService.prototype.getActivities = function () {
-        var url = app_Common_Constants_1.Constants.activitiesPath();
-        return this.http.get(url).map(function (r) { return r.json(); });
+    FakeApiService.prototype.getActivities = function () {
+        var names = new Array();
+        names.push({ id: "123", name: "Hello" });
+        names.push({ id: "124", name: "World" });
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(names);
+            observer.complete();
+        });
     };
-    ApiService.prototype.getParticipationActivities = function () {
+    FakeApiService.prototype.getParticipationActivities = function () {
         var activities = new Array();
         activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
         activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
@@ -39,11 +43,11 @@ var ApiService = (function (_super) {
             observer.complete();
         });
     };
-    ApiService = __decorate([
+    FakeApiService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], ApiService);
-    return ApiService;
+    ], FakeApiService);
+    return FakeApiService;
 }(app_Interfaces_Api_1.ApiServiceable));
-exports.ApiService = ApiService;
-//# sourceMappingURL=app.Services.Api.js.map
+exports.FakeApiService = FakeApiService;
+//# sourceMappingURL=app.Services.FakeApi.js.map
