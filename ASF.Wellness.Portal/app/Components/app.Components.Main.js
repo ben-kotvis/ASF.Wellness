@@ -13,6 +13,7 @@ var core_1 = require('@angular/core');
 var app_Model_User_1 = require('../Model/app.Model.User');
 var app_Components_Activities_1 = require('../Components/app.Components.Activities');
 var app_Components_Events_1 = require('../Components/app.Components.Events');
+var app_Components_MonthMenu_1 = require('../Components/app.Components.MonthMenu');
 var MainComponent = (function () {
     function MainComponent() {
     }
@@ -25,7 +26,7 @@ var MainComponent = (function () {
         core_1.Component({
             selector: 'app-main',
             templateUrl: './app/Components/app.Components.Main.html',
-            directives: [app_Components_Activities_1.ActivitiesComponent, app_Components_Events_1.EventsComponent]
+            directives: [app_Components_Activities_1.ActivitiesComponent, app_Components_Events_1.EventsComponent, app_Components_MonthMenu_1.MonthMenuComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], MainComponent);

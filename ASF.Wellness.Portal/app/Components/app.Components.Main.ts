@@ -3,12 +3,13 @@
 import { User } from '../Model/app.Model.User';
 import { ActivitiesComponent } from '../Components/app.Components.Activities';
 import { EventsComponent } from '../Components/app.Components.Events';
+import { MonthMenuComponent } from '../Components/app.Components.MonthMenu';
 
 
 @Component({
     selector: 'app-main',
     templateUrl: './app/Components/app.Components.Main.html',
-    directives: [ActivitiesComponent,EventsComponent]
+    directives: [ActivitiesComponent, EventsComponent, MonthMenuComponent]
 })
 export class MainComponent {
     loginLinkMessage: string;
