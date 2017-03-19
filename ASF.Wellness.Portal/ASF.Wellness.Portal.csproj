@@ -68,6 +68,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Components\app.Components.Main.html" />
+    <Content Include="app\Components\app.Components.Events.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -120,8 +122,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.Module.ts" />
     <TypeScriptCompile Include="app\Common\app.Common.Constants.ts" />
+    <TypeScriptCompile Include="app\Components\app.Components.Main.ts" />
+    <TypeScriptCompile Include="app\Components\app.Components.Events.ts" />
     <TypeScriptCompile Include="app\Interfaces\app.Interfaces.Api.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.User.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.Event.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Participation.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.ParticipationEvent.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.ParticipationActivity.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Activity.ts" />
     <TypeScriptCompile Include="app\Services\app.Services.FakeApi.ts" />

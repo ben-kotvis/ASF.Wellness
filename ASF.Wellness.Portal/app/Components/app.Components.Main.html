@@ -1,0 +1,85 @@
+﻿<div>
+    <header>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="#monthWellness">Wellness Portal</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right wellness-nav-right">
+                <li class="dropdown" uib-dropdown>
+                    <a uib-dropdown-toggle href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{loginLinkMessage}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                        <li><a class="btn btn-link" ng-show="authInfo.isAuthenticated" ng-click="logout()">Logout</a></li>
+                        <li><a class="btn btn-link" ng-hide="authInfo.isAuthenticated" ng-click="login()">Login</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#/frequentlyAskedQuestions">FAQs</a></li>
+                <li ng-show="currentUser.isAdministrator"><a href="#/reports">Reports</a></li>
+                <li ng-show="currentUser.isAdministrator" class="dropdown" uib-dropdown>
+                    <a href="#" uib-dropdown-toggle class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Administration <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu" uib-dropdown-menu>
+                        <li><a href="#/activities">Activities</a></li>
+                        <li><a href="#/events">Events</a></li>
+                        <li><a href="#/minuteOptions">Minute Options</a></li>
+                        <li><a class="btn-link" role="button" href="#" ng-click="exitApprovalMode()">Exit Approval Mode</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+
+
+        </nav>
+    </header>
+</div>
+
+
+
+
+<div>Users Go Here</div>
+
+
+<div class="container-fluid">
+
+    <div class="col-md-10 col-md-offset-2">
+        <div>
+
+            <div class="row">
+
+                <div class="month-menu">Menu goes here</div>
+
+            </div>
+            <div class="row">
+                <app-activities></app-activities>
+                <br />
+                <app-events></app-events>
+                <div class="text-right">
+
+                    <button class="btn" role="button" type="button" ng-click="submitForApproval()" ng-show="selectedUser == null && userParticipation.State != 'SubmissionSent'">
+                        Submit For approval
+                    </button>
+
+                    <button ng-hide="userParticipation.State == 'SubmissionSent'" class="btn btn-primary" role="button" type="button" ng-click="saveChanges()">Save Changes</button>
+
+                    <div ng-hide="selectedUser == null">
+                        <span ng-show="userParticipation.Approved">Approved</span>
+
+
+                        <button class="btn-link" role="button" type="button" 
+                                ng-click="approveUser()">
+                            Approve {{selectedUser.firstName}} {{selectedUser.lastName}} for this month
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--
+<div ng-show="$root.alerts.length > 0" class="alert-holder">
+    <uib-alert ng-repeat="alert in $root.alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+</div>
+    -->

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
-    selector: 'home',
+    selector: 'app-activities',
     templateUrl: './app/Components/app.Components.Activities.html'
 })
 export class ActivitiesComponent {

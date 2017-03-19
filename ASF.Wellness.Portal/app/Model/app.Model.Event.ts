@@ -1,5 +1,5 @@
 ﻿
-export class Activity {
+export class Event {
 
     public name: string;
     public id: string;

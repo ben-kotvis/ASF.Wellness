@@ -11,25 +11,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 //import { ApiService, ApiServiceable } from '../Services/app.Services.Api';
 var app_Interfaces_Api_1 = require('../Interfaces/app.Interfaces.Api');
-var ActivitiesComponent = (function () {
-    function ActivitiesComponent(apiService) {
+var EventsComponent = (function () {
+    function EventsComponent(apiService) {
         this.apiService = apiService;
         this.todoEdit = null;
         this.title = "Hello world";
     }
-    ActivitiesComponent.prototype.ngOnInit = function () {
+    EventsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
-        this.apiService.getParticipationActivities().subscribe(function (items) { return _this.participations = items; });
+        this.apiService.getEvents().subscribe(function (items) { return _this.events = items; });
+        this.apiService.getParticipationEvents().subscribe(function (items) { return _this.participations = items; });
     };
-    ActivitiesComponent = __decorate([
+    EventsComponent = __decorate([
         core_1.Component({
-            selector: 'app-activities',
-            templateUrl: './app/Components/app.Components.Activities.html'
+            selector: 'app-events',
+            templateUrl: './app/Components/app.Components.Events.html'
         }), 
         __metadata('design:paramtypes', [app_Interfaces_Api_1.ApiServiceable])
-    ], ActivitiesComponent);
-    return ActivitiesComponent;
+    ], EventsComponent);
+    return EventsComponent;
 }());
-exports.ActivitiesComponent = ActivitiesComponent;
-//# sourceMappingURL=app.Components.Activities.js.map
+exports.EventsComponent = EventsComponent;
+//# sourceMappingURL=app.Components.Events.js.map

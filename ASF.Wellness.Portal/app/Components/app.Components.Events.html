@@ -1,0 +1,80 @@
+﻿<div class="goergous-holder" >
+    <h4>Events</h4>
+    <form name="eventForm" novalidate ng-submit="addEvent()">
+        <table class="table table-striped wellness-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="wide">Event Name</th>
+
+                    <th>Uploaded File</th>
+                    <th>Points Earned</th>
+                    <th width="30%">Event Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="5">
+                        <span class="col-md-12 spinner">
+                            <span class="bounce1"></span>
+                            <span class="bounce2"></span>
+                            <span class="bounce3"></span>
+                        </span>
+                    </td>
+                </tr>
+                <tr *ngFor="let event of participations">
+                    <td>
+
+                        <button type="button" ng-click="removeEvent(this)" class="btn-link" role="button">Delete</button>
+                    </td>
+                    <td>
+
+                        {{event.name}}
+                    </td>
+
+                    <td>
+
+                        <a ntarget="_blank" href="{{event.fileId}}{{linkAddon}}">Download</a>
+                        <span>No Attachment</span>
+                    </td>
+                    <td>{{event.points}}</td>
+                    <td>{{event.date | date: 'MM/dd/yyyy' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right"><span class="bold">Total: </span></td>
+                    <td colspan="2"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Add" />
+                    </td>
+                    <td colspan="1">
+                        <select ng-model="newEventName" class="form-control" required>
+                            <option value="" disabled selected>Select Event</option>
+                            <option *ngFor="let eventOption of events" value="{{eventOption.name}}">{{eventOption.name}}</option>
+                        </select>
+                    </td>
+                    <td colspan="2">
+                        <label class="btn btn-primary" for="fileUpload">
+                            <input id="fileUpload" type="file" style="display:none;" ng-model="attachments" file-change="uploadFile($event, files)">
+                            {{selectedFileName}}
+                        </label>
+                    </td>
+                    <td>
+                        <p class="input-group">
+                            <input type="text" class="form-control" placeholder="Select Date" ng-model="newEventDate" ng-required="true" is-open="opened" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+
+                    </td>
+
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+
+</div>

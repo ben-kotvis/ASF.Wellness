@@ -43,6 +43,25 @@ var FakeApiService = (function (_super) {
             observer.complete();
         });
     };
+    FakeApiService.prototype.getEvents = function () {
+        var names = new Array();
+        names.push({ id: "123", name: "Hello" });
+        names.push({ id: "124", name: "World" });
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(names);
+            observer.complete();
+        });
+    };
+    FakeApiService.prototype.getParticipationEvents = function () {
+        var events = new Array();
+        events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "124", name: "Running", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "125", name: "Biking", fileId: "", approved: false, date: new Date(), points: 21, userId: "adsf", approvalId: "" });
+        return Observable_1.Observable.create(function (observer) {
+            observer.next(events);
+            observer.complete();
+        });
+    };
     FakeApiService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
