@@ -1,0 +1,74 @@
+﻿
+<div class="static-left" ng-controller="usersController">
+    <div class="col-md-2">
+        <div class="goergous-holder padded graded">
+            <label>Your Information</label><br />
+
+            <div class="padded">
+                <span>Annual total</span><br />
+                <span ng-show="loadingAggregates" class="col-md-12 spinner">
+                    <span class="bounce1"></span>
+                    <span class="bounce2"></span>
+                    <span class="bounce3"></span>
+                </span>
+
+
+                <span class="bold" ng-hide="loadingAggregates">{{currentUser.AnnualTotal}}</span>
+                <br /><br />
+                <span>Average points per month</span><br />
+                <span class="bold" ng-hide="loadingAggregates">{{currentUser.AveragePointsPerMonth}}</span>
+
+                <span ng-show="loadingAggregates" class="col-md-12 spinner">
+                    <span class="bounce1"></span>
+                    <span class="bounce2"></span>
+                    <span class="bounce3"></span>
+                </span>
+                <br /><br />
+                <table class="last-column-right">
+                    <thead>
+                        <tr>
+                            <th>Points</th>
+                            <th>Premium reduction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>400-954</td>
+                            <td>$20</td>
+                        </tr>
+                        <tr>
+                            <td>955-1600</td>
+                            <td>$30</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+        <div>
+            <div ng-show="currentUser.IsAdministrator" class="goergous-holder padded graded">
+                <label for="searchTextBox">Approval Search</label><br />
+
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="searchTerm" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" data-ng-click="findUsers()">Go!</button>
+                    </span>
+                </div>
+                <div>
+                    <br />
+                    <ul class="user-search">
+                        <li ng-click="changeUser()" ng-repeat="user in users | orderBy:'user.LastName'">
+                            <a href="#monthWellness">{{user.LastName}}, {{user.FirstName}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

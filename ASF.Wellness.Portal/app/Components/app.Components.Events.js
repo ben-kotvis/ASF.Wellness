@@ -14,13 +14,15 @@ var app_Interfaces_Api_1 = require('../Interfaces/app.Interfaces.Api');
 var EventsComponent = (function () {
     function EventsComponent(apiService) {
         this.apiService = apiService;
-        this.todoEdit = null;
-        this.title = "Hello world";
     }
     EventsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.total = 0;
         this.apiService.getEvents().subscribe(function (items) { return _this.events = items; });
-        this.apiService.getParticipationEvents().subscribe(function (items) { return _this.participations = items; });
+        this.apiService.getParticipationEvents().subscribe(function (items) {
+            _this.participations = items;
+            _this.participations.forEach(function (s) { return _this.total += s.points; });
+        });
     };
     EventsComponent = __decorate([
         core_1.Component({

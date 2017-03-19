@@ -9,18 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-//import { ApiService, ApiServiceable } from '../Services/app.Services.Api';
 var app_Interfaces_Api_1 = require('../Interfaces/app.Interfaces.Api');
 var ActivitiesComponent = (function () {
     function ActivitiesComponent(apiService) {
         this.apiService = apiService;
-        this.todoEdit = null;
-        this.title = "Hello world";
     }
     ActivitiesComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.total = 0;
         this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
-        this.apiService.getParticipationActivities().subscribe(function (items) { return _this.participations = items; });
+        this.apiService.getParticipationActivities().subscribe(function (items) {
+            _this.participations = items;
+            _this.participations.forEach(function (s) { return _this.total += s.points; });
+        });
     };
     ActivitiesComponent = __decorate([
         core_1.Component({

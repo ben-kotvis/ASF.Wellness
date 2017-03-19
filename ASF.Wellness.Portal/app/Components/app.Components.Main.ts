@@ -4,12 +4,12 @@ import { User } from '../Model/app.Model.User';
 import { ActivitiesComponent } from '../Components/app.Components.Activities';
 import { EventsComponent } from '../Components/app.Components.Events';
 import { MonthMenuComponent } from '../Components/app.Components.MonthMenu';
-
+import { UsersComponent } from '../Components/app.Components.Users';
 
 @Component({
     selector: 'app-main',
     templateUrl: './app/Components/app.Components.Main.html',
-    directives: [ActivitiesComponent, EventsComponent, MonthMenuComponent]
+    directives: [ActivitiesComponent, EventsComponent, MonthMenuComponent,UsersComponent]
 })
 export class MainComponent {
     loginLinkMessage: string;

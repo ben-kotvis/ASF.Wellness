@@ -13,20 +13,22 @@ import { Observable } from 'rxjs/Observable';
 })
 export class EventsComponent {
         
-    todoEdit: any;
-    title: string;
+    total: number;
     events: Event[];
     participations: ParticipationEvent[];
 
     constructor(private apiService: ApiServiceable) {
-        
-        this.todoEdit = null;
-        this.title = "Hello world";        
+           
     }   
 
     ngOnInit() {
+        this.total = 0;
+
         this.apiService.getEvents().subscribe(items => this.events = items);
-        this.apiService.getParticipationEvents().subscribe(items => this.participations = items);
+        this.apiService.getParticipationEvents().subscribe(items => {
+            this.participations = items;
+            this.participations.forEach(s => this.total += s.points);
+        });
     }
 
 
