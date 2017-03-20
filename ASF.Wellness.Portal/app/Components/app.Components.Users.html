@@ -1,28 +1,28 @@
 ﻿
-<div class="static-left" ng-controller="usersController">
+<div class="static-left">
     <div class="col-md-2">
         <div class="goergous-holder padded graded">
             <label>Your Information</label><br />
 
             <div class="padded">
                 <span>Annual total</span><br />
-                <span ng-show="loadingAggregates" class="col-md-12 spinner">
+                <!--<span ng-show="loadingAggregates" class="col-md-12 spinner">
                     <span class="bounce1"></span>
                     <span class="bounce2"></span>
                     <span class="bounce3"></span>
-                </span>
+                </span>-->
 
 
-                <span class="bold" ng-hide="loadingAggregates">{{currentUser.AnnualTotal}}</span>
+                <span class="bold" ng-hide="loadingAggregates">{{currentUser.annualTotal}}</span>
                 <br /><br />
                 <span>Average points per month</span><br />
-                <span class="bold" ng-hide="loadingAggregates">{{currentUser.AveragePointsPerMonth}}</span>
+                <span class="bold" ng-hide="loadingAggregates">{{currentUser.averagePointsPerMonth}}</span>
 
-                <span ng-show="loadingAggregates" class="col-md-12 spinner">
+                <!--<span ng-show="loadingAggregates" class="col-md-12 spinner">
                     <span class="bounce1"></span>
                     <span class="bounce2"></span>
                     <span class="bounce3"></span>
-                </span>
+                </span>-->
                 <br /><br />
                 <table class="last-column-right">
                     <thead>
@@ -61,8 +61,8 @@
                 <div>
                     <br />
                     <ul class="user-search">
-                        <li ng-click="changeUser()" ng-repeat="user in users | orderBy:'user.LastName'">
-                            <a href="#monthWellness">{{user.LastName}}, {{user.FirstName}}</a>
+                        <li ng-click="changeUser()" *ngFor="let user of users">
+                            <a href="#monthWellness">{{user.lastName}}, {{user.firstName}}</a>
                         </li>
                     </ul>
                 </div>
