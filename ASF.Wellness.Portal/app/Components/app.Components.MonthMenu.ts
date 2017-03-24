@@ -1,8 +1,9 @@
 ﻿import {Component, Input, Inject} from '@angular/core';
 import { ApiServiceable } from '../Interfaces/app.Interfaces.Api';
 import { Month } from '../Model/app.Model.Month';
+import { MonthYear } from '../Model/app.Model.MonthYear';
 import { Observable } from 'rxjs/Observable';
-
+import { MonthsService } from '../Services/app.Services.Months';
 
 @Component({
     selector: 'app-month',
@@ -12,7 +13,7 @@ export class MonthMenuComponent {
     monthInfo: Array<Month>;
     monthOffset: number;
 
-    constructor() {
+    constructor(private monthsService: MonthsService) {
         
     }   
 
@@ -24,17 +25,28 @@ export class MonthMenuComponent {
 
     previous() {
         this.monthOffset = this.monthInfo[2].offset - 5;
+        let indexNumber = 2;
         this.monthInfo = this.getMonthInformation(this.monthOffset);
+        this.monthsService.announceMonthChanged(new MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
     }
 
     next() {
         this.monthOffset = this.monthInfo[2].offset + 5;
+
+        let indexNumber = 2;
         this.monthInfo = this.getMonthInformation(this.monthOffset);
+        this.monthsService.announceMonthChanged(new MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
     }
 
 
     setOffset(offset: number) {
+        console.log(offset);
+        this.monthOffset = offset;
+        this.monthInfo = this.getMonthInformation(this.monthOffset);
 
+        let indexNumber = 2;
+
+        this.monthsService.announceMonthChanged(new MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
         for (let item of this.monthInfo) {
             if (item.offset == offset) {
                 item.selected = true;
@@ -75,11 +87,11 @@ export class MonthMenuComponent {
         fifthDate.setMonth(fifthOffset);
 
         let monthInfo = [
-            new Month({ month: this.getMonthName(firstDate.getMonth()), year: firstDate.getFullYear(), offset: offset - 2, selected: false }),
-            new Month({ month: this.getMonthName(secondDate.getMonth()), year: secondDate.getFullYear(), offset: offset - 1, selected: false }),
-            new Month({ month: this.getMonthName(thirdDate.getMonth()), year: thirdDate.getFullYear(), offset: offset, selected: true }),
-            new Month({ month: this.getMonthName(fourthDate.getMonth()), year: fourthDate.getFullYear(), offset: offset + 1, selected: false }),
-            new Month({ month: this.getMonthName(fifthDate.getMonth()), year: fifthDate.getFullYear(), offset: offset + 2, selected: false })
+            new Month({ month: firstDate.getMonth(), monthName: this.getMonthName(firstDate.getMonth()), year: firstDate.getFullYear(), offset: offset - 2, selected: false }),
+            new Month({ month: secondDate.getMonth(), monthName: this.getMonthName(secondDate.getMonth()), year: secondDate.getFullYear(), offset: offset - 1, selected: false }),
+            new Month({ month: thirdDate.getMonth(), monthName: this.getMonthName(thirdDate.getMonth()), year: thirdDate.getFullYear(), offset: offset, selected: true }),
+            new Month({ month: fourthDate.getMonth(), monthName: this.getMonthName(fourthDate.getMonth()), year: fourthDate.getFullYear(), offset: offset + 1, selected: false }),
+            new Month({ month: fifthDate.getMonth(), monthName: this.getMonthName(fifthDate.getMonth()), year: fifthDate.getFullYear(), offset: offset + 2, selected: false })
         ];
 
         return monthInfo;

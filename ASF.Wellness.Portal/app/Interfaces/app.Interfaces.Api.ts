@@ -8,9 +8,9 @@ import { ParticipationEvent } from '../Model/app.Model.ParticipationEvent';
 @Injectable()    
 export abstract class ApiServiceable {
     abstract getActivities(): Observable<Activity[]>;
-    abstract getParticipationActivities(): Observable<ParticipationActivity[]>;
+    abstract getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]>;
     abstract getEvents(): Observable<Event[]>;
-    abstract getParticipationEvents(): Observable<ParticipationEvent[]>;
+    abstract getParticipationEvents(month: number, year: number): Observable<ParticipationEvent[]>;
 }
 
 

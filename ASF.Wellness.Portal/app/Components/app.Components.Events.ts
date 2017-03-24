@@ -25,7 +25,7 @@ export class EventsComponent {
         this.total = 0;
 
         this.apiService.getEvents().subscribe(items => this.events = items);
-        this.apiService.getParticipationEvents().subscribe(items => {
+        this.apiService.getParticipationEvents(1,2017).subscribe(items => {
             this.participations = items;
             this.participations.forEach(s => this.total += s.points);
         });

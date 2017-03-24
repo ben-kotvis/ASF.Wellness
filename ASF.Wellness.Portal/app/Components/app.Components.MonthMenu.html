@@ -1,6 +1,6 @@
 ﻿<ul ng-controller="monthMenuController" class="pagination">
 
     <li (click)="previous()"><a href="#">Previous</a></li>
-    <li *ngFor="let monthYear of monthInfo" [ngClass]="{'active': monthYear.selected}" (click)="setOffset(monthYear.offset)"><a href="#">{{monthYear.month}}, {{monthYear.year}}</a></li>
+    <li *ngFor="let monthYear of monthInfo" [ngClass]="{'active': monthYear.selected}" (click)="setOffset(monthYear.offset)"><a href="#">{{monthYear.monthName}}, {{monthYear.year}}</a></li>
     <li (click)="next()"><a href="#">Next</a></li>
 </ul>

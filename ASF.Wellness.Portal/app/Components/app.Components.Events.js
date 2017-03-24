@@ -19,7 +19,7 @@ var EventsComponent = (function () {
         var _this = this;
         this.total = 0;
         this.apiService.getEvents().subscribe(function (items) { return _this.events = items; });
-        this.apiService.getParticipationEvents().subscribe(function (items) {
+        this.apiService.getParticipationEvents(1, 2017).subscribe(function (items) {
             _this.participations = items;
             _this.participations.forEach(function (s) { return _this.total += s.points; });
         });

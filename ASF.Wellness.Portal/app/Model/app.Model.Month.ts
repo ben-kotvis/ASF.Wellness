@@ -3,13 +3,15 @@
 
 export class Month {
 
-    public month: string;
+    public monthName: string;
+    public month: number;
     public year: number;
     public offset: number;
     public selected: boolean;
     constructor(
         fields?: {
-            month?: string,
+            monthName?: string,
+            month?: number,
             year?: number,
             offset?: number,
             selected?: boolean

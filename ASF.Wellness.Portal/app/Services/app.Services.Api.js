@@ -29,7 +29,7 @@ var ApiService = (function (_super) {
         var url = app_Common_Constants_1.Constants.activitiesPath();
         return this.http.get(url).map(function (r) { return r.json(); });
     };
-    ApiService.prototype.getParticipationActivities = function () {
+    ApiService.prototype.getParticipationActivities = function (month, year) {
         var activities = new Array();
         activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
         activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
@@ -48,7 +48,7 @@ var ApiService = (function (_super) {
             observer.complete();
         });
     };
-    ApiService.prototype.getParticipationEvents = function () {
+    ApiService.prototype.getParticipationEvents = function (month, year) {
         var events = new Array();
         events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
         events.push({ id: "124", name: "Running", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });

@@ -10,8 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var app_Model_Month_1 = require('../Model/app.Model.Month');
+var app_Model_MonthYear_1 = require('../Model/app.Model.MonthYear');
+var app_Services_Months_1 = require('../Services/app.Services.Months');
 var MonthMenuComponent = (function () {
-    function MonthMenuComponent() {
+    function MonthMenuComponent(monthsService) {
+        this.monthsService = monthsService;
     }
     MonthMenuComponent.prototype.ngOnInit = function () {
         this.monthOffset = 0;
@@ -19,13 +22,22 @@ var MonthMenuComponent = (function () {
     };
     MonthMenuComponent.prototype.previous = function () {
         this.monthOffset = this.monthInfo[2].offset - 5;
+        var indexNumber = 2;
         this.monthInfo = this.getMonthInformation(this.monthOffset);
+        this.monthsService.announceMonthChanged(new app_Model_MonthYear_1.MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
     };
     MonthMenuComponent.prototype.next = function () {
         this.monthOffset = this.monthInfo[2].offset + 5;
+        var indexNumber = 2;
         this.monthInfo = this.getMonthInformation(this.monthOffset);
+        this.monthsService.announceMonthChanged(new app_Model_MonthYear_1.MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
     };
     MonthMenuComponent.prototype.setOffset = function (offset) {
+        console.log(offset);
+        this.monthOffset = offset;
+        this.monthInfo = this.getMonthInformation(this.monthOffset);
+        var indexNumber = 2;
+        this.monthsService.announceMonthChanged(new app_Model_MonthYear_1.MonthYear({ month: this.monthInfo[indexNumber].month, year: this.monthInfo[indexNumber].year }));
         for (var _i = 0, _a = this.monthInfo; _i < _a.length; _i++) {
             var item = _a[_i];
             if (item.offset == offset) {
@@ -60,11 +72,11 @@ var MonthMenuComponent = (function () {
         var fifthOffset = currentMonthIndex + 2;
         fifthDate.setMonth(fifthOffset);
         var monthInfo = [
-            new app_Model_Month_1.Month({ month: this.getMonthName(firstDate.getMonth()), year: firstDate.getFullYear(), offset: offset - 2, selected: false }),
-            new app_Model_Month_1.Month({ month: this.getMonthName(secondDate.getMonth()), year: secondDate.getFullYear(), offset: offset - 1, selected: false }),
-            new app_Model_Month_1.Month({ month: this.getMonthName(thirdDate.getMonth()), year: thirdDate.getFullYear(), offset: offset, selected: true }),
-            new app_Model_Month_1.Month({ month: this.getMonthName(fourthDate.getMonth()), year: fourthDate.getFullYear(), offset: offset + 1, selected: false }),
-            new app_Model_Month_1.Month({ month: this.getMonthName(fifthDate.getMonth()), year: fifthDate.getFullYear(), offset: offset + 2, selected: false })
+            new app_Model_Month_1.Month({ month: firstDate.getMonth(), monthName: this.getMonthName(firstDate.getMonth()), year: firstDate.getFullYear(), offset: offset - 2, selected: false }),
+            new app_Model_Month_1.Month({ month: secondDate.getMonth(), monthName: this.getMonthName(secondDate.getMonth()), year: secondDate.getFullYear(), offset: offset - 1, selected: false }),
+            new app_Model_Month_1.Month({ month: thirdDate.getMonth(), monthName: this.getMonthName(thirdDate.getMonth()), year: thirdDate.getFullYear(), offset: offset, selected: true }),
+            new app_Model_Month_1.Month({ month: fourthDate.getMonth(), monthName: this.getMonthName(fourthDate.getMonth()), year: fourthDate.getFullYear(), offset: offset + 1, selected: false }),
+            new app_Model_Month_1.Month({ month: fifthDate.getMonth(), monthName: this.getMonthName(fifthDate.getMonth()), year: fifthDate.getFullYear(), offset: offset + 2, selected: false })
         ];
         return monthInfo;
     };
@@ -89,7 +101,7 @@ var MonthMenuComponent = (function () {
             selector: 'app-month',
             templateUrl: './app/Components/app.Components.MonthMenu.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [app_Services_Months_1.MonthsService])
     ], MonthMenuComponent);
     return MonthMenuComponent;
 }());

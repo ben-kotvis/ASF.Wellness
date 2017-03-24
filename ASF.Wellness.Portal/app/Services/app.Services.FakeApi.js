@@ -33,11 +33,11 @@ var FakeApiService = (function (_super) {
             observer.complete();
         });
     };
-    FakeApiService.prototype.getParticipationActivities = function () {
+    FakeApiService.prototype.getParticipationActivities = function (month, year) {
         var activities = new Array();
-        activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        activities.push({ id: "125", name: "Biking", numberOfMinutes: 30, approved: false, date: new Date(), points: 21, userId: "adsf", approvalId: "" });
+        activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        activities.push({ id: "125", name: "Biking", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points: 21, userId: "adsf", approvalId: "" });
         return Observable_1.Observable.create(function (observer) {
             observer.next(activities);
             observer.complete();
@@ -52,11 +52,11 @@ var FakeApiService = (function (_super) {
             observer.complete();
         });
     };
-    FakeApiService.prototype.getParticipationEvents = function () {
+    FakeApiService.prototype.getParticipationEvents = function (month, year) {
         var events = new Array();
-        events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        events.push({ id: "124", name: "Running", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        events.push({ id: "125", name: "Biking", fileId: "", approved: false, date: new Date(), points: 21, userId: "adsf", approvalId: "" });
+        events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "124", name: "Running", fileId: "", approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "125", name: "Biking", fileId: "", approved: false, date: new Date(year, month, 2), points: 21, userId: "adsf", approvalId: "" });
         return Observable_1.Observable.create(function (observer) {
             observer.next(events);
             observer.complete();

@@ -129,6 +129,7 @@
     <TypeScriptCompile Include="app\Components\app.Components.Main.ts" />
     <TypeScriptCompile Include="app\Components\app.Components.Events.ts" />
     <TypeScriptCompile Include="app\Interfaces\app.Interfaces.Api.ts" />
+    <TypeScriptCompile Include="app\Model\app.Model.MonthYear.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Month.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.User.ts" />
     <TypeScriptCompile Include="app\Model\app.Model.Event.ts" />
@@ -139,6 +140,7 @@
     <TypeScriptCompile Include="app\Services\app.Services.FakeApi.ts" />
     <TypeScriptCompile Include="app\Services\app.Services.Api.ts" />
     <TypeScriptCompile Include="app\Components\app.Components.Activities.ts" />
+    <TypeScriptCompile Include="app\Services\app.Services.Months.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -10,25 +10,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var app_Interfaces_Api_1 = require('../Interfaces/app.Interfaces.Api');
+var app_Services_Months_1 = require('../Services/app.Services.Months');
 var ActivitiesComponent = (function () {
-    function ActivitiesComponent(apiService) {
+    function ActivitiesComponent(apiService, monthsService) {
         this.apiService = apiService;
+        this.monthsService = monthsService;
     }
     ActivitiesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.total = 0;
         this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
-        this.apiService.getParticipationActivities().subscribe(function (items) {
+        var today = new Date();
+        this.apiService.getParticipationActivities(today.getMonth(), today.getFullYear()).subscribe(function (items) {
             _this.participations = items;
             _this.participations.forEach(function (s) { return _this.total += s.points; });
         });
+        this.monthsService.monthChanged$.subscribe(function (monthYear) {
+            _this.apiService.getParticipationActivities(monthYear.month, monthYear.year).subscribe(function (items) {
+                _this.participations = items;
+                _this.participations.forEach(function (s) { return _this.total += s.points; });
+            });
+        });
+    };
+    ActivitiesComponent.prototype.participationsReceived = function (items) {
+        var _this = this;
+        console.log(items.length);
+        this.participations = items;
+        this.participations.forEach(function (s) { return _this.total += s.points; });
     };
     ActivitiesComponent = __decorate([
         core_1.Component({
             selector: 'app-activities',
             templateUrl: './app/Components/app.Components.Activities.html'
         }), 
-        __metadata('design:paramtypes', [app_Interfaces_Api_1.ApiServiceable])
+        __metadata('design:paramtypes', [app_Interfaces_Api_1.ApiServiceable, app_Services_Months_1.MonthsService])
     ], ActivitiesComponent);
     return ActivitiesComponent;
 }());

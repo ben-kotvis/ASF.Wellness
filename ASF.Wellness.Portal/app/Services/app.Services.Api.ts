@@ -26,7 +26,7 @@ export class ApiService extends ApiServiceable {
         return this.http.get(url).map(r => r.json() as Activity[]);     
         
     }
-    getParticipationActivities(): Observable<ParticipationActivity[]> {
+    getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]> {
         var activities = new Array<ParticipationActivity>();
 
         activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
@@ -53,7 +53,7 @@ export class ApiService extends ApiServiceable {
         });
     }
 
-    getParticipationEvents(): Observable<ParticipationEvent[]> {
+    getParticipationEvents(month: number, year: number): Observable<ParticipationEvent[]> {
         var events = new Array<ParticipationEvent>();
 
         events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });

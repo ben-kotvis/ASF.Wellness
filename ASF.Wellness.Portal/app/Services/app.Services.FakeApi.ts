@@ -33,12 +33,12 @@ export class FakeApiService extends ApiServiceable {
         
     }
 
-    getParticipationActivities(): Observable<ParticipationActivity[]> {
+    getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]> {
         var activities = new Array<ParticipationActivity>();
 
-        activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        activities.push({ id: "125", name: "Biking", numberOfMinutes: 30, approved: false, date: new Date(), points:21, userId: "adsf", approvalId: "" });
+        activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        activities.push({ id: "124", name: "Running", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        activities.push({ id: "125", name: "Biking", numberOfMinutes: 30, approved: false, date: new Date(year, month, 2), points:21, userId: "adsf", approvalId: "" });
         
 
         return Observable.create(observer => {
@@ -60,12 +60,12 @@ export class FakeApiService extends ApiServiceable {
         });
     }
 
-    getParticipationEvents(): Observable<ParticipationEvent[]> {
+    getParticipationEvents(month: number, year: number): Observable<ParticipationEvent[]> {
         var events = new Array<ParticipationEvent>();
 
-        events.push({ id: "123", name: "Walking", fileId: "",  approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        events.push({ id: "124", name: "Running", fileId: "",  approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
-        events.push({ id: "125", name: "Biking", fileId: "",  approved: false, date: new Date(), points: 21, userId: "adsf", approvalId: "" });
+        events.push({ id: "123", name: "Walking", fileId: "", approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "124", name: "Running", fileId: "", approved: false, date: new Date(year, month, 2), points: 1, userId: "adsf", approvalId: "" });
+        events.push({ id: "125", name: "Biking", fileId: "", approved: false, date: new Date(year, month, 2), points: 21, userId: "adsf", approvalId: "" });
 
 
         return Observable.create(observer => {
