@@ -1,4 +1,4 @@
-﻿{
+﻿/*{
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
@@ -14,12 +14,12 @@
     "node_modules",
     "typings/main",
     "typings/main.d.ts"
-  ]/*,
+  ],
   "files": [
     "app/app.Module.ts",
     "app/Components/app.Components.Activities.ts",
     "app/Services/app.Services.Api.ts",
     "app/Model/app.Model.Activity.ts",
     "app/Common/app.Common.Constants.ts"
-  ]*/
-}
+  ]
+}*/

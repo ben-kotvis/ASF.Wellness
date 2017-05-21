@@ -26,6 +26,15 @@ export class ApiService extends ApiServiceable {
         return this.http.get(url).map(r => r.json() as Activity[]);     
         
     }
+    
+    createActivity(activity: Activity): Observable<Activity> {
+        
+        return Observable.create(observer => {
+        
+            observer.complete();
+        });
+    }
+
     getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]> {
         var activities = new Array<ParticipationActivity>();
 

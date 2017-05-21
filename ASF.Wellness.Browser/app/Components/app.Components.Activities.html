@@ -1,0 +1,75 @@
+﻿
+<section id="home">
+
+    <section id="main">
+
+        <div class="goergous-holder" >
+            <h4>Activites</h4>
+            <form name="activityForm" novalidate ng-submit="addActivity()">
+                <table class="table table-striped wellness-table">
+                    <thead>
+                        <tr>
+                            <th width="100px"></th>
+                            <th class="wide">Activity</th>
+                            <th>Minutes</th>
+                            <th>Points</th>
+                            <th class="dateColumn" width="30%">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="loading == true">
+                            <td colspan="5">
+                                <!--<span class="col-md-12 spinner">
+                                    <span class="bounce1"></span>
+                                    <span class="bounce2"></span>
+                                    <span class="bounce3"></span>
+                                </span>-->
+                            </td>
+                        </tr>
+                        <tr ng-hide="loading == true" *ngFor="let participation of participations" >
+                            <td>
+                                <button type="button" ng-click="removeActivity()" class="btn-link" role="button">Delete</button>
+                            </td>
+                            <td>
+
+                                {{participation.name}}
+                            </td>
+                            <td>{{participation.numberOfMinutes}}</td>
+                            <td>{{participation.points}}</td>
+                            <td>{{participation.date | date: 'MM/dd/yyyy'}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right"><span class="bold">Total: </span></td>
+                            <td colspan="2">{{total}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot ng-hide="userParticipation.State == 'SubmissionSent'">
+                        <tr>
+                            <td>
+                                <input type="submit" ng-disabled="activityForm.$invalid" class="btn btn-primary" value="Add" />
+                            </td>
+                            <td>
+                                <select ng-model="newActivityId" class="form-control" required>
+                                    <option value="" disabled selected>Select your Activity</option>
+                                    <option *ngFor="let activity of activities" value="{{activity.id}}">{{activity.name}}</option>
+                                </select>
+                            </td>
+                            <td colspan="2">
+                             
+
+                            </td>
+                            <td>
+                                
+
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+
+
+        </section>
+
+    </section>
+

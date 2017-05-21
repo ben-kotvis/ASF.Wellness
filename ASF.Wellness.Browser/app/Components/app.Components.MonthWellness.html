@@ -1,0 +1,30 @@
+﻿
+<div class="row">
+
+
+    <app-month class="month-menu"></app-month>
+
+</div>
+<div class="row">
+    <app-activities></app-activities>
+    <br />
+    <app-events></app-events>
+    <div class="text-right">
+
+        <button class="btn" role="button" type="button" ng-click="submitForApproval()" ng-show="selectedUser == null && userParticipation.State != 'SubmissionSent'">
+            Submit For approval
+        </button>
+
+        <button ng-hide="userParticipation.State == 'SubmissionSent'" class="btn btn-primary" role="button" type="button" ng-click="saveChanges()">Save Changes</button>
+
+        <div ng-hide="selectedUser == null">
+            <span ng-show="userParticipation.Approved">Approved</span>
+
+
+            <button class="btn-link" role="button" type="button"
+                    ng-click="approveUser()">
+                Approve {{selectedUser.firstName}} {{selectedUser.lastName}} for this month
+            </button>
+        </div>
+    </div>
+</div>

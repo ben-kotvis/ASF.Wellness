@@ -14,23 +14,35 @@ import { ParticipationEvent } from '../Model/app.Model.ParticipationEvent';
 
 @Injectable()
 export class FakeApiService extends ApiServiceable {
-    
+
+   _names: Activity[];
+
     constructor(private http: Http) {
         super();
+        this._names = new Array<Activity>();
+
+        this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true });
+        this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true });
     }  
 
-    getActivities(): Observable<Activity[]> {    
-                
-        var names = new Array<Activity>();
 
-        names.push({ id: "123", name: "Hello" });
-        names.push({ id: "124", name: "World" });
+    getActivities(): Observable<Activity[]> {    
 
         return Observable.create(observer => {
-            observer.next(names);
+            observer.next(this._names);
             observer.complete();
         });
         
+    }
+
+    createActivity(activity: Activity): Observable<Activity> {
+
+        this._names.push(activity);
+        
+        return Observable.create(observer => {
+            observer.next(activity);
+            observer.complete();
+        });
     }
 
     getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]> {

@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var MonthYear = (function () {
     function MonthYear(fields) {
         if (fields)
@@ -7,4 +8,3 @@ var MonthYear = (function () {
     return MonthYear;
 }());
 exports.MonthYear = MonthYear;
-//# sourceMappingURL=app.Model.MonthYear.js.map

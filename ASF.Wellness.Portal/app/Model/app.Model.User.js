@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var User = (function () {
     function User() {
         this.isAdministrator = true;
@@ -10,4 +11,3 @@ var User = (function () {
     return User;
 }());
 exports.User = User;
-//# sourceMappingURL=app.Model.User.js.map

@@ -1,0 +1,61 @@
+﻿<div class="goergous-holder">
+    <h4>Activity Management</h4>
+    <form name="activityFormManagement" novalidate (ngSubmit)="addActivity()">
+        <table class="table table-striped wellness-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Active</th>
+                    <th>Updated By</th>
+                    <th>Updated On</th>
+                </tr>
+            </thead>
+            <tr ng-show="activityOptions == null">
+                <td colspan="5">
+
+                    Loading...
+                </td>
+            </tr>
+            <tr *ngFor="let activityOption of activities" [ngClass]="{ editable: true, editing : activityOption.editing }">
+
+                <td>
+                    <div class="edit-only">
+                        <span class="glyphicon glyphicon-ok" (click)="saveExisting()" title="Save"></span>
+                        <span (click)="cancelExisting()" class="glyphicon glyphicon-remove" title="Cancel"></span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-pencil" (click)="edit()" title="Edit"></span>
+                        <span (click)="delete()" class="glyphicon glyphicon-remove" title="Remove"></span>
+                    </div>
+
+                </td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="activityOption.name" name="name" />
+                    <span>{{activityOption.name}}</span>
+                </td>
+                <td>
+                    <span>{{activityOption.active}}</span>
+                    <input type="checkbox" [(ngModel)]="activityOption.active" name="active" />
+                </td>
+                <td contenteditable="false">{{activityOption.updatedBy}}</td>
+                <td contenteditable="false">{{activityOption.updatedOn  | date: 'MM/dd/yyyy'}}</td>
+            </tr>
+
+            <tfoot>
+                <tr>
+                    <td>
+                        <input type="submit" ng-disabled="activityFormManagement.$invalid" class="btn btn-primary" value="Add"  />
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" [(ngModel)]="newActivityName" name="newName" required />
+                    </td>
+                    <td colspan="3">
+                        <input type="checkbox" [(ngModel)]="newActive" name="newActive" />
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+</form>
+</div>
