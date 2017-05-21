@@ -1,1 +1,1 @@
-{"version":3,"file":"app.Interfaces.Api.js","sourceRoot":"","sources":["app.Interfaces.Api.ts"],"names":[],"mappings":";;;;;;;;AACA,sCAA2C;AAO3C,IAAsB,cAAc;IAApC;IAMA,CAAC;IAAD,qBAAC;AAAD,CAAC,AAND,IAMC;AANqB,cAAc;IADnC,iBAAU,EAAE;GACS,cAAc,CAMnC;AANqB,wCAAc"}
+{"version":3,"file":"app.Interfaces.Api.js","sourceRoot":"","sources":["app.Interfaces.Api.ts"],"names":[],"mappings":";;;;;;;;AACA,sCAA2C;AAO3C,IAAsB,cAAc;IAApC;IAQA,CAAC;IAAD,qBAAC;AAAD,CAAC,AARD,IAQC;AARqB,cAAc;IADnC,iBAAU,EAAE;GACS,cAAc,CAQnC;AARqB,wCAAc"}

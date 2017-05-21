@@ -30,8 +30,26 @@ var FakeApiService = (function (_super) {
         var _this = _super.call(this) || this;
         _this.http = http;
         _this._names = new Array();
-        _this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
-        _this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "150", name: "Weight lifting", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "542", name: "Winter Activities (e.g. - snowshoeing, skiing, shoveling, etc.)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12343", name: "Canoeing/Rowing", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12334", name: "Cross training", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "123322", name: "Organized Athletic Sporting Event (e.g. - basketball, volleyball, soccer, flag football)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12387", name: "Bicycling", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "123411", name: "Aerobic/Fitness Class (e.g. - spinning, zumba, boot camps, water aerobics, etc.)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1236587", name: "Racquetball", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "123611", name: "Yoga/Pilates/Stretching", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "123324", name: "Walking (Brisk)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1238444", name: "Running/Jogging", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1236688", name: "Rock Climbing", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "123311", name: "Chopping/splitting wood", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1231474", name: "Swimming", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1237111", name: "Hiking", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12378987", name: "Martial Arts", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1233444", name: "Roller Blading/Roller Skating/Ice Skating", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "1237717", name: "New Activity 2 updated", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12391338", name: "Golfing (without cart)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "12371545", name: "Cardio Machines (e.g. - Stair-steppers, Elliptical, Rowing machine, etc.)", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
         return _this;
     }
     FakeApiService.prototype.getActivities = function () {
@@ -45,6 +63,24 @@ var FakeApiService = (function (_super) {
         this._names.push(activity);
         return Observable_1.Observable.create(function (observer) {
             observer.next(activity);
+            observer.complete();
+        });
+    };
+    FakeApiService.prototype.updateActivity = function (activity) {
+        var item = this._names.find(function (v, i, obj) { return v.id == activity.id; });
+        item.name = activity.name;
+        item.active = activity.active;
+        item.dirty = false;
+        return Observable_1.Observable.create(function (observer) {
+            observer.next("Completed");
+            observer.complete();
+        });
+    };
+    FakeApiService.prototype.deleteActivity = function (id) {
+        var index = this._names.findIndex(function (i) { return i.id == id; });
+        this._names.splice(index, 1);
+        return Observable_1.Observable.create(function (observer) {
+            observer.next("Completed");
             observer.complete();
         });
     };

@@ -18,18 +18,31 @@ var ActivityManagementComponent = (function () {
     }
     ActivityManagementComponent.prototype.addActivity = function () {
         var created = new app_Model_Activity_1.Activity();
-        created.id = "asdfsa";
-        created.name = "";
+        created.name = this.newActivityName;
+        created.active = this.newActive;
+        created.dirty = false;
+        created.updatedBy = "bkotvis";
+        created.updatedOn = new Date();
         this.apiService.createActivity(created);
     };
     ActivityManagementComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.newActive = true;
         this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
+        this.editingActivity = new app_Model_Activity_1.Activity();
     };
     ActivityManagementComponent.prototype.edit = function (activity) {
-        this.setEditing(false);
+        this.setEditing();
         this.original = JSON.stringify(activity);
         activity.dirty = true;
+        this.editingActivity = activity;
+    };
+    ActivityManagementComponent.prototype.delete = function (activity) {
+        this.apiService.deleteActivity(activity.id);
+    };
+    ActivityManagementComponent.prototype.saveExisting = function (activity) {
+        this.apiService.updateActivity(activity);
+        activity.dirty = false;
     };
     ActivityManagementComponent.prototype.cancelExisting = function (activity) {
         //console.log(activity);
@@ -37,12 +50,14 @@ var ActivityManagementComponent = (function () {
         activity.name = originalItem.name;
         activity.active = originalItem.active;
         activity.dirty = false;
+        this.setEditing();
     };
-    ActivityManagementComponent.prototype.setEditing = function (editing) {
+    ActivityManagementComponent.prototype.setEditing = function () {
         for (var i = 0; i < this.activities.length; i++) {
             var item = this.activities[i];
-            item.dirty = editing;
+            item.dirty = false;
         }
+        this.editingActivity = new app_Model_Activity_1.Activity();
     };
     return ActivityManagementComponent;
 }());

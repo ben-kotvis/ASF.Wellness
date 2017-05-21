@@ -36,6 +36,23 @@ export class ApiService extends ApiServiceable {
         });
     }
 
+    updateActivity(activity: Activity): Observable<string> {
+        
+
+        return Observable.create((observer: Observer<string>) => {
+            observer.next("Completed");
+            observer.complete();
+        });
+    }
+
+    deleteActivity(id: string): Observable<string> {
+
+        return Observable.create((observer: Observer<string>) => {
+            observer.next("Completed");
+            observer.complete();
+        });
+    }
+
     getParticipationActivities(month: number, year: number): Observable<ParticipationActivity[]> {
         var activities = new Array<ParticipationActivity>();
 

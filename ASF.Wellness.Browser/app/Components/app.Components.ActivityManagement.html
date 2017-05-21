@@ -11,7 +11,7 @@
                     <th>Updated On</th>
                 </tr>
             </thead>
-            <tr ng-show="activityOptions == null">
+            <tr *ngIf="activities == null">
                 <td colspan="5">
 
                     Loading...
@@ -21,22 +21,22 @@
 
                 <td>
                     <div class="edit-only">
-                        <span class="glyphicon glyphicon-ok" (click)="saveExisting()" title="Save"></span>
+                        <span class="glyphicon glyphicon-ok" (click)="saveExisting(activityOption)" title="Save"></span>
                         <span (click)="cancelExisting(activityOption)" class="glyphicon glyphicon-remove" title="Cancel"></span>
                     </div>
                     <div>
                         <span class="glyphicon glyphicon-pencil" (click)="edit(activityOption)" title="Edit"></span>
-                        <span (click)="delete()" class="glyphicon glyphicon-remove" title="Remove"></span>
+                        <span (click)="delete(activityOption)" class="glyphicon glyphicon-remove" title="Remove"></span>
                     </div>
 
                 </td>
                 <td>
-                    <input type="text" class="form-control" [(ngModel)]="activityOption.name" name="name" />
+                    <input type="text" class="form-control" [(ngModel)]="editingActivity.name" name="name" />
                     <span>{{activityOption.name}}</span>
                 </td>
                 <td>
                     <span>{{activityOption.active}}</span>
-                    <input type="checkbox" [(ngModel)]="activityOption.active" name="active" />
+                    <input type="checkbox" [(ngModel)]="editingActivity.active" name="active" />
                 </td>
                 <td contenteditable="false">{{activityOption.updatedBy}}</td>
                 <td contenteditable="false">{{activityOption.updatedOn  | date: 'MM/dd/yyyy'}}</td>

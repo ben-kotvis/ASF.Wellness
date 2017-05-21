@@ -14,6 +14,7 @@ export class ActivityManagementComponent {
     newActivityName: string;
     newActive: boolean;
     original: string;
+    editingActivity: Activity;
 
     constructor(private apiService: ApiServiceable) {
           
@@ -22,8 +23,11 @@ export class ActivityManagementComponent {
     addActivity() {
 
         var created = new Activity();
-        created.id = "asdfsa";
-        created.name = "";
+        created.name = this.newActivityName;
+        created.active = this.newActive;
+        created.dirty = false;
+        created.updatedBy = "bkotvis";
+        created.updatedOn = new Date();
 
         this.apiService.createActivity(created);
             
@@ -31,15 +35,30 @@ export class ActivityManagementComponent {
 
     ngOnInit() {
 
+        this.newActive = true;
         this.apiService.getActivities().subscribe(items => this.activities = items);      
+
+        this.editingActivity = new Activity();
         
     }
     edit(activity: Activity) {
 
-        this.setEditing(false);
+        this.setEditing();
 
         this.original = JSON.stringify(activity);  
         activity.dirty = true;
+
+        this.editingActivity = activity;
+    }
+
+    delete(activity: Activity) {
+        this.apiService.deleteActivity(activity.id);
+    }
+
+    saveExisting(activity: Activity) {
+
+        this.apiService.updateActivity(activity);
+        activity.dirty = false;
     }
 
     cancelExisting(activity: Activity) {
@@ -50,12 +69,15 @@ export class ActivityManagementComponent {
         activity.name = originalItem.name;
         activity.active = originalItem.active;
         activity.dirty = false;
+
+        this.setEditing();
     }
     
-    setEditing(editing: boolean) {
+    setEditing() {
         for (var i = 0; i < this.activities.length; i++) {
             var item = this.activities[i];
-            item.dirty = editing;
+            item.dirty = false;
         }
+        this.editingActivity = new Activity();
     }
 }

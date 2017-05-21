@@ -41,6 +41,18 @@ var ApiService = (function (_super) {
             observer.complete();
         });
     };
+    ApiService.prototype.updateActivity = function (activity) {
+        return Observable_1.Observable.create(function (observer) {
+            observer.next("Completed");
+            observer.complete();
+        });
+    };
+    ApiService.prototype.deleteActivity = function (id) {
+        return Observable_1.Observable.create(function (observer) {
+            observer.next("Completed");
+            observer.complete();
+        });
+    };
     ApiService.prototype.getParticipationActivities = function (month, year) {
         var activities = new Array();
         activities.push({ id: "123", name: "Walking", numberOfMinutes: 30, approved: false, date: new Date(), points: 1, userId: "adsf", approvalId: "" });
