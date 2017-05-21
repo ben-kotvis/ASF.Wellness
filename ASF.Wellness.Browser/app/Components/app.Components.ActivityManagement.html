@@ -17,15 +17,15 @@
                     Loading...
                 </td>
             </tr>
-            <tr *ngFor="let activityOption of activities" [ngClass]="{ editable: true, editing : activityOption.editing }">
+            <tr *ngFor="let activityOption of activities" [ngClass]="{ editable: true, editing : activityOption.dirty }">
 
                 <td>
                     <div class="edit-only">
                         <span class="glyphicon glyphicon-ok" (click)="saveExisting()" title="Save"></span>
-                        <span (click)="cancelExisting()" class="glyphicon glyphicon-remove" title="Cancel"></span>
+                        <span (click)="cancelExisting(activityOption)" class="glyphicon glyphicon-remove" title="Cancel"></span>
                     </div>
                     <div>
-                        <span class="glyphicon glyphicon-pencil" (click)="edit()" title="Edit"></span>
+                        <span class="glyphicon glyphicon-pencil" (click)="edit(activityOption)" title="Edit"></span>
                         <span (click)="delete()" class="glyphicon glyphicon-remove" title="Remove"></span>
                     </div>
 

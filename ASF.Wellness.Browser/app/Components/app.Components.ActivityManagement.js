@@ -26,6 +26,24 @@ var ActivityManagementComponent = (function () {
         var _this = this;
         this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
     };
+    ActivityManagementComponent.prototype.edit = function (activity) {
+        this.setEditing(false);
+        this.original = JSON.stringify(activity);
+        activity.dirty = true;
+    };
+    ActivityManagementComponent.prototype.cancelExisting = function (activity) {
+        //console.log(activity);
+        var originalItem = JSON.parse(this.original);
+        activity.name = originalItem.name;
+        activity.active = originalItem.active;
+        activity.dirty = false;
+    };
+    ActivityManagementComponent.prototype.setEditing = function (editing) {
+        for (var i = 0; i < this.activities.length; i++) {
+            var item = this.activities[i];
+            item.dirty = editing;
+        }
+    };
     return ActivityManagementComponent;
 }());
 ActivityManagementComponent = __decorate([

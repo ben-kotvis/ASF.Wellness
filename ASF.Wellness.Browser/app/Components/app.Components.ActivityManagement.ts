@@ -13,6 +13,7 @@ export class ActivityManagementComponent {
     activities: Activity[];
     newActivityName: string;
     newActive: boolean;
+    original: string;
 
     constructor(private apiService: ApiServiceable) {
           
@@ -32,5 +33,29 @@ export class ActivityManagementComponent {
 
         this.apiService.getActivities().subscribe(items => this.activities = items);      
         
+    }
+    edit(activity: Activity) {
+
+        this.setEditing(false);
+
+        this.original = JSON.stringify(activity);  
+        activity.dirty = true;
+    }
+
+    cancelExisting(activity: Activity) {
+
+        //console.log(activity);
+        var originalItem = JSON.parse(this.original);
+
+        activity.name = originalItem.name;
+        activity.active = originalItem.active;
+        activity.dirty = false;
+    }
+    
+    setEditing(editing: boolean) {
+        for (var i = 0; i < this.activities.length; i++) {
+            var item = this.activities[i];
+            item.dirty = editing;
+        }
     }
 }

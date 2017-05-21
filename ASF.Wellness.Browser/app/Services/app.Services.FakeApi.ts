@@ -22,8 +22,8 @@ export class FakeApiService extends ApiServiceable {
         super();
         this._names = new Array<Activity>();
 
-        this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true });
-        this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true });
+        this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
     }  
 
 

@@ -30,8 +30,8 @@ var FakeApiService = (function (_super) {
         var _this = _super.call(this) || this;
         _this.http = http;
         _this._names = new Array();
-        _this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true });
-        _this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true });
+        _this._names.push({ id: "123", name: "Hello", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
+        _this._names.push({ id: "124", name: "World", updatedBy: "Me", updatedOn: new Date(), active: true, dirty: false, });
         return _this;
     }
     FakeApiService.prototype.getActivities = function () {
