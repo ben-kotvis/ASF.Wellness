@@ -20,9 +20,9 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: 'monthWellness', pathMatch: 'full' },
-    { path: 'monthWellness', component: MonthWellnessComponent },
-    { path: 'activities', component: ActivityManagementComponent }
+    { path: '', redirectTo: 'monthWellness/0', pathMatch: 'full' },
+    { path: 'monthWellness/:index', component: MonthWellnessComponent },
+    { path: 'activities', component: ActivityManagementComponent },
 ];
 
 @NgModule({

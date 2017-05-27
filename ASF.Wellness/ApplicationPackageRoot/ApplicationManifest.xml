@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ASF.WellnessType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <Parameter Name="CoreAPI_InstanceCount" DefaultValue="-1" />
     <Parameter Name="API_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Activities_MinReplicaSetSize" DefaultValue="1" />
     <Parameter Name="Activities_PartitionCount" DefaultValue="1" />
@@ -16,6 +17,10 @@
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ASF.Wellness.CoreAPIPkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="ASF.Wellness.APIPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
   </ServiceManifestImport>
@@ -27,6 +32,11 @@
     <ServiceManifestRef ServiceManifestName="ASF.Wellness.ParticipantPkg" ServiceManifestVersion="1.0.0" />
   </ServiceManifestImport>
   <DefaultServices>
+    <Service Name="CoreAPI">
+      <StatelessService ServiceTypeName="CoreAPIType" InstanceCount="[CoreAPI_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
     <Service Name="API">
       <StatelessService ServiceTypeName="APIType" InstanceCount="[API_InstanceCount]">
         <SingletonPartition />

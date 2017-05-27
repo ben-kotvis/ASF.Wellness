@@ -14,7 +14,10 @@ export class MonthWellnessComponent {
 
     currentUser: User;
     selectedUser: User;
-    constructor(private monthsService: MonthsService) {
+    selectedIndex: number;
+    constructor(
+        private monthsService: MonthsService
+    ) {
         
     }   
 
@@ -22,6 +25,8 @@ export class MonthWellnessComponent {
 
         this.selectedUser = new User();
         this.currentUser = new User();
+
+        
     }
     
     
