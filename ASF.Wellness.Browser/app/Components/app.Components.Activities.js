@@ -22,25 +22,29 @@ var ActivitiesComponent = (function () {
         this.total = 0;
         this.apiService.getActivities().subscribe(function (items) { return _this.activities = items; });
         var today = new Date();
-        this.apiService.getParticipationActivities(today.getMonth(), today.getFullYear()).subscribe(function (items) {
-            _this.participations = items;
-            _this.participations.forEach(function (s) { return _this.total += s.points; });
-        });
-        this.monthsService.monthChanged$.subscribe(function (monthYear) {
-            _this.apiService.getParticipationActivities(monthYear.month, monthYear.year).subscribe(function (items) {
-                _this.participations = items;
-                _this.participations.forEach(function (s) { return _this.total += s.points; });
-            });
-        });
+        //this.apiService.getParticipationActivities(today.getMonth(), today.getFullYear()).subscribe(items => {
+        //    this.participations = items;
+        //    this.participations.forEach(s => this.total += s.points);
+        //});
+        //this.monthsService.monthChanged$.subscribe(
+        //    monthYear => {
+        //        this.apiService.getParticipationActivities(monthYear.month, monthYear.year).subscribe(items => {
+        //            this.participations = items;
+        //            this.participations.forEach(s => this.total += s.points);
+        //        });
+        //    });
     };
     ActivitiesComponent.prototype.participationsReceived = function (items) {
-        var _this = this;
-        console.log(items.length);
-        this.participations = items;
-        this.participations.forEach(function (s) { return _this.total += s.points; });
+        //console.log(items.length);
+        //this.participations = items;
+        //this.participations.forEach(s => this.total += s.points);
     };
     return ActivitiesComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], ActivitiesComponent.prototype, "participations", void 0);
 ActivitiesComponent = __decorate([
     core_1.Component({
         selector: 'app-activities',

@@ -23,9 +23,9 @@ var app_Interfaces_Api_1 = require("../app/Interfaces/app.Interfaces.Api");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var appRoutes = [
-    { path: '', redirectTo: 'monthWellness', pathMatch: 'full' },
-    { path: 'monthWellness', component: app_Components_MonthWellness_1.MonthWellnessComponent },
-    { path: 'activities', component: app_Components_ActivityManagement_1.ActivityManagementComponent }
+    { path: '', redirectTo: 'monthWellness/0', pathMatch: 'full' },
+    { path: 'monthWellness/:index', component: app_Components_MonthWellness_1.MonthWellnessComponent },
+    { path: 'activities', component: app_Components_ActivityManagement_1.ActivityManagementComponent },
 ];
 var AppModule = (function () {
     function AppModule() {
